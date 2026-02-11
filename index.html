@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOA NFT Marketplace</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #FFD700;
+    }
+    button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #FFD700;
+      border-radius: 10px;
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+      padding: 15px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 10px;
+      border-top: 2px solid #FFD700;
+      font-size: 12px;
+    }
+
+    /* Estilos para la sección de planes */
+    .pricing {
+      text-align: center;
+      padding: 50px 20px;
+      background: #111;
+      color: #FFD700;
+    }
+    .plans {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .plan {
+      background: #000;
+      border: 1px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 4px 6px rgba(255,215,0,0.3);
+    }
+    .plan.featured {
+      border: 2px solid #FFD700;
+      box-shadow: 0 6px 10px rgba(255,215,0,0.5);
+    }
+    .plan h3 {
+      margin-top: 0;
+      color: #FFD700;
+    }
+    .plan ul {
+      list-style: none;
+      padding: 0;
+    }
+    .plan ul li {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+    .icon.usdc { color: #2d9cdb; margin-right: 5px; }
+    .icon.paypal { color: #0070ba; margin-right: 5px; }
+    .icon.doa { color: #e63946; margin-right: 5px; }
+    .plan button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .plan button:hover {
+      background: #e6c200;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      .plans {
+        flex-direction: column;
+        align-items: center;
+      }
+      .plan {
+        width: 90%;
+        margin-bottom: 20px;
+      }
+      .gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
+      header h1 {
+        font-size: 22px;
+      }
+      button {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DOA NFT Marketplace</h1>
+    <button onclick="connectWallet()">Conectar Wallet</button>
+  </header>
+
+  <section class="gallery" id="gallery">
+    <!-- NFTs cargados dinámicamente -->
+  </section>
+
+  <!-- Sección de planes de suscripción -->
+  <section class="pricing">
+    <h2>Planes de Suscripción – Marketplace NFT</h2>
+    <div class="plans">
+
+      <div class="plan">
+        <h3>Básico</h3>
+        <p>Ideal para empezar</p>
+        <ul>
+          <li><span class="icon usdc">💎</span> USDC: 3 USDC → 3 NFTs/mes</li>
+          <li><span class="icon paypal">💳</span> PayPal: 3 USD → 3 NFTs/mes</li>
+          <li><span class="icon doa">🔥</span> DOA: 3 USDC eq. → <strong>5 NFTs/mes + descuento automático</strong></li>
+        </ul>
+        <button>Suscribirse</button>
+      </div>
+
+      <div class="plan">
+        <h3>Estándar</h3>
+        <p>Más flexibilidad</p>
+        <ul>
+          <li><span class="icon usdc">💎</span> USDC: 5 USDC → 5 NFTs/mes</li>
+          <li><span class="icon paypal">💳</span> PayPal: 5 USD → 5 NFTs/mes</li>
+          <li><span class="icon doa">🔥</span> DOA: 5 USDC eq. → <strong>7 NFTs/mes + prioridad en listados</strong></li>
+        </ul>
+        <button>Suscribirse</button>
+      </div>
+
+      <div class="plan featured">
+        <h3>Premium</h3>
+        <p>Para creadores activos</p>
+        <ul>
+          <li><span class="icon usdc">💎</span> USDC: 15 USDC → 15 NFTs/mes</li>
+          <li><span class="icon paypal">💳</span> PayPal: 15 USD → 15 NFTs/mes</li>
+          <li><span class="icon doa">🔥</span> DOA: 15 USDC eq. → <strong>20 NFTs/mes + recompensas DAO + promoción destacada</strong></li>
+        </ul>
+        <button>Suscribirse</button>
+      </div>
+
+      <div class="plan">
+        <h3>Enterprise</h3>
+        <p>Máxima exposición</p>
+        <ul>
+          <li><span class="icon usdc">💎</span> USDC: 30 USDC → 30 NFTs/mes</li>
+          <li><span class="icon paypal">💳</span> PayPal: 30 USD → 30 NFTs/mes</li>
+          <li><span class="icon doa">🔥</span> DOA: 30 USDC eq. → <strong>40 NFTs/mes + acceso a gobernanza DAO + distribución automática de beneficios</strong></li>
+        </ul>
+        <button>Suscribirse</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 DOA Token Marketplace — Seguridad y Transparencia
+  </footer>
+
+  <script>
+    async function connectWallet() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          alert("Wallet conectada: " + accounts[0]);
+        } catch (error) {
+          alert("Error al conectar wallet: " + error.message);
+        }
+      } else {
+        alert("Instala Metamask para continuar.");
+      }
+    }
+
+    // Galería NFT básica (ejemplo real con metadata)
+    const nfts = [
+      { name: "DOA Genesis #1", price: "0.5 MATIC", image: "https://via.placeholder.com/200x200?text=NFT+1" },
+      { name: "DOA Genesis #2", price: "0.8 MATIC", image: "https://via.placeholder.com/200x200?text=NFT+2" },
+      { name: "DOA Genesis #3", price: "1.2 MATIC", image: "https://via.placeholder.com/200x200?text=NFT+3" }
+    ];
+
+    const gallery = document.getElementById("gallery");
+    nfts.forEach(nft => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${nft.image}" alt="${nft.name}">
+        <h3>${nft.name}</h3>
+        <p>Precio: ${nft.price}</p>
+        <button>Comprar</button>
+      `;
+      gallery.appendChild(card);
+    });
+  </script>
+</body>
+</html>

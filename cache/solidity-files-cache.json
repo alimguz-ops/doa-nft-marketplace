@@ -1,0 +1,43 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\doa-nft-marketplace\\contracts\\NFTMarketplaceSubscriptions.sol": {
+      "lastModificationDate": 1770780539188,
+      "contentHash": "eab75da89b84cf62fd5b2b223f8c4c2d",
+      "sourceName": "contracts/NFTMarketplaceSubscriptions.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IERC721",
+        "NFTMarketplaceSubscriptions"
+      ]
+    }
+  }
+}

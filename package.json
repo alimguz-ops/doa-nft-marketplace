@@ -1,0 +1,27 @@
+{
+  "name": "doa-nft-marketplace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy:mumbai": "hardhat run scripts/deployMarketplace.js --network mumbai",
+    "deploy:polygon": "hardhat run scripts/deployMarketplace.js --network polygon"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "chai": "4.3.7",
+    "dotenv": "^17.2.4",
+    "ethers": "^6.16.0",
+    "hardhat": "2.28.5",
+    "hardhat-gas-reporter": "^2.3.0",
+    "mocha": "^11.7.5",
+    "solidity-coverage": "^0.8.17",
+    "ts-node": "^10.9.2",
+    "typechain": "^8.3.2",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
+}
