@@ -1,9 +1,10 @@
-# Environment files
+cat >> .gitignore << 'EOF'
+# Environment
 .env
 .env.local
 .env.*.local
 
-# Node / build
+# Node and build
 node_modules/
 dist/
 build/
@@ -14,3 +15,10 @@ build/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Optional: ignore yarn lock if you want to remove it from repo
+yarn.lock
+EOF
+
+git add .gitignore
+git commit -m "Add .gitignore to ignore env, node_modules, build and yarn.lock"
