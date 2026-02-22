@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="vsr-7RGKnUsaJxE-EbSDbZvuCpnrA6DF0W8iB-01yyE" />
+    <title>DOA MONSTER — Marketplace Automatizado</title>
+
+    <!-- MONETIZACIÓN Y ANALÍTICA (MANTENIDO) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1802989521678619"
+     crossorigin="anonymous"></script>
+    <script src="https://pl28693331.effectivegatecpm.com/5b/b0/0f/5bb00f11f7f416036edd1de62bae2166.js"></script>
+    <script async src="https://www.googletagmanager.com"></script>
+    <script type="text/javascript" data-cfasync="false">
+    <script type="text/javascript" data-cfasync="false">
+    /*<![CDATA[/* */
+    (function(){var m=window,a="d30821c03f80282ac46bbccfd6ee5e68",z=[["siteId",882-586+844-960+5271813],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],n=["d3d3LmJldHRlcmFkc3lzdGVtLmNvbS9qanNvbjUubWluLmNzcw==","ZDJrazBvM2ZyN2VkMDEuY2xvdWRmcm9udC5uZXQvQ0QvbWVtYmVkLm1pbi5qcw=="],x=-1,s,r,b=function(){clearTimeout(r);x++;if(n[x]&&!(1797627319000<(new Date).getTime()&&1<x)){s=m.document.createElement("script");s.type="text/javascript";s.async=!0;var h=m.document.getElementsByTagName("script")[0];s.src="https://"+atob(n[x]);s.crossOrigin="anonymous";s.onerror=b;s.onload=function(){clearTimeout(r);m[a.slice(0,16)+a.slice(0,16)]||b()};r=setTimeout(b,5E3);h.parentNode.insertBefore(s,h)}};if(!m[a]){try{Object.freeze(m[a]=z)}catch(e){}b()}})();
+    /*]]>/* */
+   <script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E14Z7MFKB7');</script>
+
+    <!-- LIBRERÍAS WEB3 Y GRÁFICOS -->
+    <script src="https://cdnjs.cloudflare.com"></script>
+    <script src="https://unpkg.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <style>
+        :root { --gold: #FFD700; --neon: #ff00e6; --bg: #050505; --card: rgba(15, 15, 15, 0.95); --text: #fff; --border: #222; }
+        body { background: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; padding-bottom: 50px; transition: 0.3s; overflow-x: hidden; display: flex; }
+        
+        /* SIDEBAR COMPACTO */
+        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 50px; background: #000; border-right: 1px solid var(--border); transition: 0.3s; z-index: 10001; overflow: hidden; display: flex; flex-direction: column; }
+        .sidebar:hover { width: 180px; box-shadow: 5px 0 20px rgba(0,0,0,0.8); }
+        .nav-item { display: flex; align-items: center; padding: 12px 15px; color: #666; cursor: pointer; transition: 0.2s; white-space: nowrap; text-decoration: none; }
+        .nav-item i { min-width: 20px; font-style: normal; font-size: 1.1rem; }
+        .nav-item span { margin-left: 15px; font-weight: bold; font-size: 0.75rem; opacity: 0; transition: 0.2s; font-family: 'Orbitron'; }
+        .sidebar:hover .nav-item span { opacity: 1; }
+        .nav-item:hover { color: var(--gold); background: rgba(255, 215, 0, 0.05); }
+
+        /* CONTENIDO PRINCIPAL RE-AJUSTADO */
+        .main-content { flex: 1; margin-left: 50px; padding: 15px; width: calc(100vw - 50px); box-sizing: border-box; }
+        .container { max-width: 1200px; margin: auto; }
+        .header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid rgba(255,215,0,0.1); margin-bottom: 20px; }
+        h1 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); margin: 0; }
+
+        .wallet-card { background: #111; border: 1px solid var(--border); padding: 5px 15px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; margin-top: 10px; }
+        #chart-container { width: 100%; height: 160px; background: #000; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 15px; }
+
+        /* CARRUSEL DE IMÁGENES (TENDENCIAS) RECUPERADO */
+        .carousel-wrapper { overflow: hidden; width: 100%; position: relative; margin: 15px 0; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .nft-carousel { display: flex; gap: 15px; transition: transform 0.5s ease; }
+        .carousel-item { min-width: 200px; height: 100px; background: rgba(255,0,230,0.05); border: 1px solid var(--neon); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--neon); flex-direction: column; }
+
+        /* BUSQUEDA Y FILTROS RECUPERADOS */
+        .controls-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin: 15px 0; }
+        input { padding: 8px; background: #000; border: 1px solid var(--border); border-radius: 5px; color: var(--gold); font-family: 'Rajdhani'; font-size: 0.8rem; outline: none; }
+
+        /* GRID DE ACCIONES Y AFILIACIÓN VIP */
+        .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .btn-main { background: var(--gold); color: #000; border: none; padding: 8px; border-radius: 5px; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; font-size: 0.7rem; width: 100%; margin-top: 10px; }
+
+        /* BARRA INFERIOR ULTRA-COMPACTA */
+        .footer-status-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 1px solid #1a1a1a; display: flex; align-items: center; padding: 4px 15px; z-index: 10000; height: 28px; font-size: 9px; }
+        .ticker-container { flex: 1; overflow: hidden; white-space: nowrap; margin: 0 15px; }
+        .ticker-wrapper { display: inline-block; animation: ticker-animation 45s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 30px; color: #555; font-weight: bold; }
+        .up { color: #00ff88; } .down { color: #ff4444; }
+        @keyframes ticker-animation { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <div style="padding: 15px; color: var(--gold); font-family: 'Orbitron'; font-weight: bold; text-align: center;">DM</div>
+    <a class="nav-item"><i>📊</i><span>ANALÍTICA</span></a>
+    <a class="nav-item"><i>🛒</i><span>MERCADO NFT</span></a>
+    <a class="nav-item"><i>💎</i><span>VIP ACCESO</span></a>
+    <a class="nav-item"><i>📰</i><span>NOTICIAS</span></a>
+    <a class="nav-item" style="margin-top:auto"><i>⚙️</i><span>AJUSTES</span></a>
+</nav>
+
+<main class="main-content">
+    <div class="container">
+        <div class="header">
+            <h1>DOA MONSTER</h1>
+            <div class="wallet-card">
+                <button class="btn-main" onclick="connect()" style="margin:0; width:auto; padding: 3px 12px;">CONECTAR</button>
+                <div id="walletAddr" style="font-size:0.65rem; color:var(--gold)">0x...</div>
+                <div id="userBalance" style="color:var(--gold); font-weight:800; font-size:0.65rem">0.00 POL</div>
+            </div>
+        </div>
+
+        <div id="chart-container"></div>
+
+        <h2 style="color:var(--neon); font-family:'Orbitron'; font-size:0.75rem; letter-spacing:1px;">🔥 TENDENCIAS LIVE</h2>
+        <div class="carousel-wrapper">
+            <div id="nftCarousel" class="nft-carousel">
+                <!-- Se autogenera por JS -->
+            </div>
+        </div>
+
+        <div class="controls-grid">
+            <input type="text" id="nftSearch" placeholder="🔍 Buscar ID o Contrato..." onkeyup="filterNFTs()">
+            <input type="number" id="minPrice" placeholder="Min POL" onchange="filterNFTs()">
+            <input type="number" id="maxPrice" placeholder="Max POL" onchange="filterNFTs()">
+        </div>
+
+        <div class="actions-grid">
+            <div class="card">
+                <h3 style="font-size:0.8rem; color:var(--gold); margin:0 0 10px 0;">🚀 LISTAR NFT</h3>
+                <input type="text" id="nftAddr" placeholder="Dirección Contrato 0x...">
+                <input type="number" id="tokenId" placeholder="Token ID" style="margin:5px 0;">
+                <input type="text" id="price" placeholder="Precio en POL">
+                <button class="btn-main" onclick="listNFT()">PUBLICAR AHORA</button>
+            </div>
+            <div class="card">
+                <h3 style="font-size:0.8rem; color:var(--neon); margin:0 0 10px 0;">💎 AFILIACIÓN PRO (VIP)</h3>
+                <p style="font-size:0.65rem; color:#888;">Acceso a preventas y comisiones 0%. <br>Costo: <b>0.1 POL / 30 Días</b></p>
+                <button class="btn-main" style="background:var(--neon); color:#fff;" onclick="buySubMatic()">ACTIVAR MEMBRESÍA</button>
+                <div id="countdown" style="font-size:0.6rem; margin-top:8px; text-align:center; color:var(--neon);">Inactivo</div>
+            </div>
+        </div>
+
+        <h2 style="color: var(--gold); font-family:'Orbitron'; font-size:0.85rem; border-left:3px solid var(--gold); padding-left:10px;">🏪 MERCADO GLOBAL NFT</h2>
+        <div id="nftGallery" class="nft-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:15px; margin-top:15px;">
+            <p style="color:#444; font-size:0.7rem;">Cargando mercado real...</p>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 0 80px 0; color: #222; font-size: 0.55rem; letter-spacing: 2px;">
+            DOA MONSTER AUTOMATED PLATFORM 2026<br>
+            SSL ACTIVO / POLÍTICA DE PRIVACIDAD / <span style="color:#444;">ACTUALIZADO FEBRERO 2026</span>
+        </footer>
+    </div>
+</main>
+
+<div class="footer-status-bar">
+    <div style="color:#00ff00; font-weight:bold; white-space:nowrap; display:flex; align-items:center;">
+        <span style="height:5px; width:5px; background:#00ff00; border-radius:50%; display:inline-block; margin-right:5px; box-shadow:0 0 5px #00ff00;"></span> LIVE
+    </div>
+    <div class="ticker-container">
+        <div class="ticker-wrapper" id="master-ticker">
+            <span class="ticker-item">BTC: <b id="btc-val" style="color:var(--gold)">...</b> <small id="btc-pct"></small></span>
+            <span class="ticker-item">ETH: <b id="eth-val" style="color:var(--gold)">...</b> <small id="eth-pct"></small></span>
+            <span class="ticker-item">POL: <b id="pol-val" style="color:var(--gold)">...</b> <small id="pol-pct"></small></span>
+            <span class="ticker-item">⛽ GAS: <b id="gas-val" style="color:var(--gold)">--</b> GWEI</span>
+            <span class="ticker-item">🛡️ SSL ENCRIPTADO | PRIVACIDAD V2.6 FEB 2026 | TERMINAL DOA MONSTER</span>
+        </div>
+    </div>
+    <div style="color:#555; font-weight:bold; border-left: 1px solid #222; padding-left:10px;">COLLECTOR PRO</div>
+</div>
+
+<!-- BARRA INFERIOR MINIMALISTA DOA 2026 -->
+<div class="footer-status-bar" style="height: 30px; background: #000; border-top: 1px solid #111; display: flex; align-items: center; padding: 0 15px; position: fixed; bottom: 0; width: 100%; z-index: 10000; font-family: 'Rajdhani', sans-serif;">
+    
+    <!-- INDICADOR MINIMALISTA -->
+    <div style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+        <span style="height: 5px; width: 5px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 5px #00ff00; animation: pulse 2s infinite;"></span>
+        <span style="color: #00ff00; font-size: 9px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Orbitron';">EN LÍNEA</span>
+    </div>
+
+    <!-- CARRUSEL DE PRECIOS -->
+    <div class="ticker-container" style="flex: 1; overflow: hidden; white-space: nowrap; margin: 0 20px;">
+        <div class="ticker-wrapper" id="master-ticker" style="display: inline-block; animation: ticker-animation 40s linear infinite;">
+            <span class="ticker-item" style="padding: 0 30px; font-size: 10px; color: #777;">BTC: <b id="btc-val" style="color:var(--gold)">...</b> <small id="btc-pct"></small></span>
+            <span class="ticker-item" style="padding: 0 30px; font-size: 10px; color: #777;">ETH: <b id="eth-val" style="color:var(--gold)">...</b> <small id="eth-pct"></small></span>
+            <span class="ticker-item" style="padding: 0 30px; font-size: 10px; color: #777;">POL: <b id="pol-val" style="color:var(--gold)">...</b> <small id="pol-pct"></small></span>
+            <span class="ticker-item" style="padding: 0 30px; font-size: 10px; color: #777;">⛽ GAS: <b id="gas-val" style="color:var(--gold)">--</b> GWEI</span>
+            <span class="ticker-item" style="padding: 0 30px; font-size: 10px; color: #444;">🛡️ SSL ENCRIPTADO ACTIVO | PRIVACIDAD ACTUALIZADA FEBRERO 2026 | TERMINAL DOA</span>
+        </div>
+    </div>
+
+    <div style="font-family: 'Orbitron'; font-size: 9px; color: #555; font-weight: bold; border-left: 1px solid #222; padding-left: 15px;">
+        PRO v2.6
+    </div>
+</div>
+
+<script>
+    // --- 1. LÓGICA DE MERCADO REAL ---
+    async function updateTicker() {
+        try {
+            // URL Corregida para CryptoCompare
+            const ts = new Date().getTime();
+            const url = `https://min-api.cryptocompare.com{ts}`;
+            
+            const response = await fetch(url);
+            const json = await response.json();
+            const data = json.RAW;
+
+            if (data) {
+                updatePrice('btc', data.BTC.USD);
+                updatePrice('eth', data.ETH.USD);
+                updatePrice('pol', data.POL.USD);
+                
+                // Gas Polygon Simulado con varianza real
+                document.getElementById('gas-val').innerText = (141 + Math.random() * 12).toFixed(1);
+
+                // Clonación para carrusel infinito
+                const ticker = document.getElementById('master-ticker');
+                if (!ticker.dataset.cloned) {
+                    ticker.innerHTML += ticker.innerHTML; 
+                    ticker.dataset.cloned = "true";
+                }
+            }
+        } catch (e) {
+            console.error("Error sincronizando precios reales.");
+        }
+    }
+
+    function updatePrice(id, obj) {
+        const valEl = document.getElementById(`${id}-val`);
+        const pctEl = document.getElementById(`${id}-pct`);
+        if(valEl) valEl.innerText = `$${obj.PRICE.toLocaleString()}`;
+        if(pctEl) {
+            const p = obj.CHANGEPCT24HOUR;
+            pctEl.innerText = ` ${p >= 0 ? '▲':'▼'} ${Math.abs(p).toFixed(2)}%`;
+            pctEl.className = `pct ${p >= 0 ? 'up' : 'down'}`;
+        }
+    }
+
+    // --- 2. GRÁFICO (REQUERÍA LA LIBRERÍA) ---
+    function initChart() {
+        const container = document.getElementById('chart-container');
+        if(!container) return;
+        const chart = LightweightCharts.createChart(container, {
+            layout: { background: { color: '#000' }, textColor: '#FFD700' },
+            grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } },
+            timeScale: { borderColor: '#222' },
+        });
+        const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255, 215, 0, 0.2)', bottomColor: 'transparent' });
+        series.setData(Array.from({length:30}, (_,i) => ({ time: (Math.floor(Date.now()/1000))+(i*3600), value: 0.1040 + Math.random()*0.008 })));
+    }
+
+    // --- 3. CARRUSEL DE TENDENCIAS ---
+    function initTrendCarousel() {
+        const carousel = document.getElementById('nftCarousel');
+        if(!carousel) return;
+        carousel.innerHTML = ""; // Limpiar antes de generar
+        for(let i=1; i<=8; i++) {
+            const div = document.createElement('div');
+            div.className = 'carousel-item';
+            div.innerHTML = `<span style="font-size:1.2rem">💎</span><br><b>NFT TREND #${i}0${i}</b><br><span style="color:#fff; font-size:0.5rem">🔥 High Volume</span>`;
+            carousel.appendChild(div);
+        }
+        let pos = 0;
+        setInterval(() => {
+            pos -= 215;
+            if (Math.abs(pos) >= carousel.scrollWidth - carousel.parentElement.offsetWidth) pos = 0;
+            carousel.style.transform = `translateX(${pos}px)`;
+        }, 3500);
+    }
+
+    // --- 4. CONEXIÓN WALLET ---
+    async function connect() {
+        if(window.ethereum) {
+            try {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+                document.getElementById('walletAddr').innerText = accounts[0].substring(0,6)+'...'+accounts[0].substring(38);
+            } catch(err) { console.error("Usuario rechazó conexión"); }
+        } else { alert("Por favor instala MetaMask"); }
+    }
+
+    // --- INICIALIZACIÓN ---
+    document.addEventListener('DOMContentLoaded', () => {
+        initChart();
+        updateTicker(); // Carga instantánea
+        initTrendCarousel();
+        setInterval(updateTicker, 15000); // Refresco cada 15s
+    });
+</script>
+
+<style>
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    .up { color: #00ff00 !important; }
+    .down { color: #ff4444 !important; }
+    @keyframes ticker-animation { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+</style>
+
+<script src="https://kdmjzwq.com/br/a924728c794f8e62.js?force_https=1"></script>
+<script src="https://kdmjzwq.com/br/da3cf39a164489ee.js?force_https=1"></script>
+<script src="https://pl28693298.effectivegatecpm.com/d5/8d/c9/d58dc9110d4b60bc79c3c0f6f93822e4.js"></script>
+
+</body>
+</html>
