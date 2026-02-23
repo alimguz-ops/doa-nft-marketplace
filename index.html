@@ -124,18 +124,18 @@
     </div>
 </main>
 
-<!-- BARRA DE ESTADO -->
-<div class="fixed bottom-0 left-0 w-full bg-black border-t border-white/5 h-10 flex items-center px-4 z-[10000]">
-    <div class="flex items-center gap-2 border-r border-gray-800 pr-4">
-        <div class="h-2 w-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></div>
-        <span class="orbitron text-[9px] font-bold text-green-500 uppercase">Live</span>
-    </div>
-    <div class="flex-1 overflow-hidden">
-        <div id="master-ticker" class="animate-ticker whitespace-nowrap px-4">
-            <!-- Se llena con updateTicker() -->
+<!-- BARRA DE ESTADO INFERIOR CORREGIDA -->
+<div class="footer-status-bar">
+    <div class="status-dot"></div>
+    <div style="color: #00ff00; font-size: 9px; font-weight: bold; font-family: 'Orbitron'; letter-spacing:1px;">LIVE</div>
+    
+    <div class="ticker-container">
+        <div class="ticker-wrapper" id="master-ticker">
+            <!-- Los precios se inyectan aquí con JS -->
         </div>
     </div>
-    <div class="text-[9px] orbitron font-bold text-gray-700 pl-4 border-l border-gray-800 uppercase">PRO v2.6</div>
+    
+    <div style="color:#333; font-size:9px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #111; padding-left:15px;">PRO v2.6</div>
 </div>
 
 <script>
@@ -159,26 +159,44 @@
         }
     }
 
-    // 2. TICKER REAL (CORREGIDO)
+        // 2. TICKER REAL CON PRECIOS DINÁMICOS
     async function updateTicker() {
         try {
+            // Llamada a la API para obtener precios en tiempo real
             const res = await fetch(`https://min-api.cryptocompare.com`);
             const json = await res.json();
             const data = json.RAW;
             const container = document.getElementById('master-ticker');
             
-            const format = (name, obj) => {
-                const p = obj.CHANGEPCT24HOUR;
-                const color = p >= 0 ? '#00ff88' : '#ff4444';
-                return `<span class="px-6 text-[10px] text-gray-500 orbitron uppercase">${name}: <b class="text-yellow-400">$${obj.PRICE.toLocaleString()}</b> <span style="color:${color}">${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%</span></span>`;
+            if (!data) return;
+
+            // Dentro de tu función updateTicker()
+                const format = (name, obj) => {
+                   const p = obj.CHANGEPCT24HOUR;
+                   const colorClass = p >= 0 ? 'up' : 'down';
+                   const icon = p >= 0 ? '▲' : '▼';
+                   return `
+                   <span class="ticker-item">
+                        ${name}: <span class="footer-val">$${obj.PRICE.toLocaleString()}</span> 
+                        <span class="${colorClass}">${icon} ${Math.abs(p).toFixed(2)}%</span>
+                 </span>`;
             };
 
-            const content = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + 
-            `<span class="px-6 text-[10px] text-gray-500 orbitron uppercase">⛽ GAS: <b class="text-yellow-400">${(Math.random()*40+60).toFixed(1)}</b> GWEI</span>` +
-            `<span class="px-6 text-[10px] text-gray-600 orbitron uppercase">🛡️ DOA TERMINAL ACTIVA</span>`;
+            // Construimos la línea de precios
+            const ticketContent = 
+                format('BTC', data.BTC.USD) + 
+                format('ETH', data.ETH.USD) + 
+                format('POL', data.POL.USD) + 
+                `<span class="px-8 text-[10px] text-gray-500 orbitron">⛽ GAS: <b class="text-yellow-400">${(Math.random()*15+35).toFixed(1)}</b> GWEI</span>` +
+                `<span class="px-8 text-[10px] text-gray-600 orbitron tracking-[0.2em]">🛡️ TERMINAL DOA ACTIVA</span>`;
+
+            // Insertamos y duplicamos para el efecto de scroll infinito
+            container.innerHTML = ticketContent + ticketContent;
             
-            container.innerHTML = content + content;
-        } catch(e) { console.log("Ticker Error"); }
+        } catch(e) { 
+            console.error("Error en Ticker de precios:", e); 
+            document.getElementById('master-ticker').innerHTML = `<span class="text-[9px] text-red-800 px-10">ERROR DE SINCRONIZACIÓN DE RED... REINTENTANDO</span>`;
+        }
     }
 
     // 3. GRÁFICO REAL
