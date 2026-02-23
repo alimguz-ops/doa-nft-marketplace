@@ -1,3 +1,9 @@
+---
+layout: default
+title: "CSS para la barra de estado"
+permalink: /css/status-bar/
+---
+
 /* FUERZA LA APARICIÓN DE LA BARRA INFERIOR */
 .footer-status-bar {
     position: fixed !important;
