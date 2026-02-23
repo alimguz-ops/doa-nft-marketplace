@@ -1,70 +1,66 @@
-<style>
-/* BARRA DE ESTADO INFERIOR */
+/* FUERZA LA APARICIÓN DE LA BARRA INFERIOR */
 .footer-status-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #000;
-    border-top: 1px solid #111;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    z-index: 10000;
-    height: 35px; /* Altura ideal */
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 40px !important;
+    background: #000000 !important;
+    border-top: 1px solid #1a1a1a !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+    z-index: 99999 !important; /* Estar por encima de todo */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
 }
 
-/* EL BOMBILLO VERDE */
 .status-dot {
     height: 8px;
     width: 8px;
     background: #00ff00;
     border-radius: 50%;
-    box-shadow: 0 0 10px #00ff00;
+    box-shadow: 0 0 12px #00ff00;
     animation: status-pulse 1.5s infinite;
-    margin-right: 10px;
+    margin-right: 12px;
     flex-shrink: 0;
 }
 
-@keyframes status-pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-/* EL CARRUSEL DE PRECIOS */
 .ticker-container {
     flex: 1;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-    margin: 0 20px;
 }
 
 .ticker-wrapper {
     display: inline-block;
-    animation: ticker-animation 30s linear infinite; /* 30s para que sea legible */
+    white-space: nowrap;
+    animation: ticker-animation 30s linear infinite;
 }
 
 .ticker-item {
     display: inline-block;
-    padding: 0 35px;
-    font-size: 0.7rem;
-    color: #555;
+    padding: 0 40px;
+    font-size: 11px;
+    color: #666;
     font-weight: bold;
     font-family: 'Orbitron', sans-serif;
 }
 
 .footer-val {
-    color: var(--gold);
+    color: #FFD700; /* Oro */
     margin-left: 5px;
 }
 
-.up { color: #00ff88 !important; margin-left: 5px; }
-.down { color: #ff4444 !important; margin-left: 5px; }
+.up { color: #00ff88 !important; margin-left: 6px; font-size: 9px; }
+.down { color: #ff4444 !important; margin-left: 6px; font-size: 9px; }
 
 @keyframes ticker-animation {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-</style>
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.9); }
+}
