@@ -1,0 +1,73 @@
+---
+---
+.footer-status-bar { ... }
+
+/* BARRA INFERIOR BLINDADA - DOA MONSTER 2026 */
+.footer-status-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 40px !important;
+    background: #000000 !important;
+    border-top: 1px solid #1a1a1a !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+    z-index: 999999 !important; /* Capa máxima para GitHub Pages */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.9);
+}
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #00ff00;
+    animation: status-pulse 1.5s infinite;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.ticker-container {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-animation 35s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 40px;
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+
+.footer-val {
+    color: #FFD700;
+    margin-left: 5px;
+}
+
+.up { color: #00ff88 !important; margin-left: 6px; font-size: 9px; }
+.down { color: #ff4444 !important; margin-left: 6px; font-size: 9px; }
+
+@keyframes ticker-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
