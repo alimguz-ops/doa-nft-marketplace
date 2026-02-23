@@ -124,23 +124,24 @@
     </div>
 </main>
 
-<!-- BARRA DE ESTADO INFERIOR CORREGIDA -->
+<!-- BARRA DE ESTADO INFERIOR (SÓLO UNA VEZ) -->
 <div class="footer-status-bar">
     <div class="status-dot"></div>
-    <div style="color: #00ff00; font-size: 9px; font-weight: bold; font-family: 'Orbitron'; letter-spacing:1px;">LIVE</div>
+    <div style="color: #00ff00; font-size: 10px; font-weight: bold; font-family: 'Orbitron'; letter-spacing:1px; margin-right: 20px;">LIVE</div>
     
     <div class="ticker-container">
-        <div class="ticker-wrapper" id="master-ticker">
-            <!-- Los precios se inyectan aquí con JS -->
+        <div id="master-ticker" class="ticker-wrapper">
+            <span class="ticker-item text-gray-500">CONECTANDO A DATOS DE MERCADO 2026...</span>
         </div>
     </div>
     
-    <div style="color:#333; font-size:9px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #111; padding-left:15px;">PRO v2.6</div>
+    <div style="color:#222; font-size:10px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #111; padding-left:20px; white-space:nowrap;">PRO v2.6</div>
 </div>
 
 <script>
     const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
     const INFURA_ID = "3702e6360508431a9c9f2bf02450db30";
+    // Corregido: Agregado /v3/ y la barra inclinada
     const POLYGON_RPC = `https://polygon-mainnet.infura.io{INFURA_ID}`;
     let provider, signer, account;
 
@@ -159,10 +160,10 @@
         }
     }
 
-        // 2. TICKER REAL CON PRECIOS DINÁMICOS
+    // 2. TICKER REAL CON PRECIOS DINÁMICOS (CORREGIDO)
     async function updateTicker() {
         try {
-            // Llamada a la API para obtener precios en tiempo real
+            // URL Corregida con el endpoint de precios completo
             const res = await fetch(`https://min-api.cryptocompare.com`);
             const json = await res.json();
             const data = json.RAW;
@@ -170,38 +171,36 @@
             
             if (!data) return;
 
-            // Dentro de tu función updateTicker()
-                const format = (name, obj) => {
-                   const p = obj.CHANGEPCT24HOUR;
-                   const colorClass = p >= 0 ? 'up' : 'down';
-                   const icon = p >= 0 ? '▲' : '▼';
-                   return `
-                   <span class="ticker-item">
-                        ${name}: <span class="footer-val">$${obj.PRICE.toLocaleString()}</span> 
-                        <span class="${colorClass}">${icon} ${Math.abs(p).toFixed(2)}%</span>
-                 </span>`;
+            const format = (name, obj) => {
+                const p = obj.CHANGEPCT24HOUR;
+                const colorClass = p >= 0 ? 'up' : 'down';
+                const icon = p >= 0 ? '▲' : '▼';
+                return `
+                <span class="ticker-item">
+                    ${name}: <span class="footer-val">$${obj.PRICE.toLocaleString(undefined, {minimumFractionDigits:2})}</span> 
+                    <span class="${colorClass}">${icon} ${Math.abs(p).toFixed(2)}%</span>
+                </span>`;
             };
 
-            // Construimos la línea de precios
             const ticketContent = 
                 format('BTC', data.BTC.USD) + 
                 format('ETH', data.ETH.USD) + 
                 format('POL', data.POL.USD) + 
-                `<span class="px-8 text-[10px] text-gray-500 orbitron">⛽ GAS: <b class="text-yellow-400">${(Math.random()*15+35).toFixed(1)}</b> GWEI</span>` +
-                `<span class="px-8 text-[10px] text-gray-600 orbitron tracking-[0.2em]">🛡️ TERMINAL DOA ACTIVA</span>`;
+                `<span class="ticker-item text-gray-500 uppercase"> ⛽ GAS: <b class="text-yellow-400">${(Math.random()*15+35).toFixed(1)}</b> GWEI</span>` +
+                `<span class="ticker-item text-gray-600 uppercase tracking-widest"> 🛡️ TERMINAL DOA ACTIVA</span>`;
 
-            // Insertamos y duplicamos para el efecto de scroll infinito
             container.innerHTML = ticketContent + ticketContent;
             
         } catch(e) { 
-            console.error("Error en Ticker de precios:", e); 
-            document.getElementById('master-ticker').innerHTML = `<span class="text-[9px] text-red-800 px-10">ERROR DE SINCRONIZACIÓN DE RED... REINTENTANDO</span>`;
+            console.error("Error en Ticker:", e);
         }
     }
 
     // 3. GRÁFICO REAL
     function initChart() {
-        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+        const container = document.getElementById('chart-container');
+        if(!container) return;
+        const chart = LightweightCharts.createChart(container, {
             layout: { background: { color: 'transparent' }, textColor: '#FFD700', fontFamily: 'Orbitron' },
             grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } },
             timeScale: { borderColor: '#222' },
@@ -212,7 +211,7 @@
         chart.timeScale().fitContent();
     }
 
-    // 4. PREVIEW NFT (CORREGIDO)
+    // 4. PREVIEW NFT
     async function fetchNFTPreview() {
         const address = document.getElementById('nftAddr').value;
         const id = document.getElementById('tokenId').value;
@@ -226,7 +225,7 @@
                 const gateway = uri.replace("ipfs://", "https://ipfs.io");
                 const meta = await fetch(gateway).then(r => r.json());
                 const img = meta.image.replace("ipfs://", "https://ipfs.io");
-                preview.innerHTML = `<img src="${img}" class="h-full rounded-lg object-contain p-2">`;
+                preview.innerHTML = `<img src="${img}" class="h-full rounded-lg object-contain p-2 mx-auto">`;
             } catch (e) { preview.innerText = "Metadata Error"; }
         }
     }
@@ -255,194 +254,30 @@
         initChart();
         updateTicker();
         setInterval(updateTicker, 30000);
-        document.getElementById('nftAddr').addEventListener('input', fetchNFTPreview);
-        document.getElementById('tokenId').addEventListener('input', fetchNFTPreview);
+        
+        const nftAddrEl = document.getElementById('nftAddr');
+        const tokenIdEl = document.getElementById('tokenId');
+        if(nftAddrEl) nftAddrEl.addEventListener('input', fetchNFTPreview);
+        if(tokenIdEl) tokenIdEl.addEventListener('input', fetchNFTPreview);
         
         const car = document.getElementById('nftCarousel');
-        for(let i=0; i<15; i++) {
-            car.innerHTML += `<div class="min-w-[180px] glass p-4 text-center">
-                <div class="text-2xl mb-2">👾</div>
-                <div class="orbitron text-[8px] text-yellow-500 font-bold mb-1 uppercase">Monster #${500+i}</div>
-                <div class="text-[9px] font-bold">${(Math.random()*1.5).toFixed(2)} POL</div>
-            </div>`;
+        if(car) {
+            for(let i=0; i<15; i++) {
+                car.innerHTML += `<div class="min-w-[180px] glass p-4 text-center">
+                    <div class="text-2xl mb-2">👾</div>
+                    <div class="orbitron text-[8px] text-yellow-500 font-bold mb-1 uppercase">Monster #${500+i}</div>
+                    <div class="text-[9px] font-bold">${(Math.random()*1.5).toFixed(2)} POL</div>
+                </div>`;
+            }
+            let pos = 0;
+            setInterval(() => {
+                pos += 196;
+                if (pos >= car.scrollWidth / 2) pos = 0;
+                car.style.transform = `translateX(-${pos}px)`;
+            }, 4000);
         }
-        let pos = 0;
-        setInterval(() => {
-            pos += 196;
-            if (pos >= car.scrollWidth - 800) pos = 0;
-            car.style.transform = `translateX(-${pos}px)`;
-        }, 4000);
     });
 </script>
-   
-    <!-- LA BARRA VA AQUÍ (FUERA DEL MAIN) -->
-    <div class="footer-status-bar">
-        <div class="status-dot"></div>
-        <div style="color: #00ff00; font-size: 10px; font-weight: bold; font-family: 'Orbitron'; letter-spacing:1px; margin-right: 20px;">LIVE</div>
-        
-        <div class="ticker-container">
-            <div id="master-ticker" class="ticker-wrapper">
-                <span class="ticker-item text-gray-500">CONECTANDO A DATOS DE MERCADO 2026...</span>
-            </div>
-        </div>
-        
-        <div style="color:#222; font-size:10px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #111; padding-left:20px; white-space:nowrap;">PRO v2.6</div>
-    </div>
-
-/* FUERZA LA APARICIÓN DE LA BARRA INFERIOR */
-.footer-status-bar {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 40px !important;
-    background: #000000 !important;
-    border-top: 1px solid #1a1a1a !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 20px !important;
-    z-index: 99999 !important; /* Estar por encima de todo */
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
-}
-
-.status-dot {
-    height: 8px;
-    width: 8px;
-    background: #00ff00;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #00ff00;
-    animation: status-pulse 1.5s infinite;
-    margin-right: 12px;
-    flex-shrink: 0;
-}
-
-.ticker-container {
-    flex: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-}
-
-.ticker-wrapper {
-    display: inline-block;
-    white-space: nowrap;
-    animation: ticker-animation 30s linear infinite;
-}
-
-.ticker-item {
-    display: inline-block;
-    padding: 0 40px;
-    font-size: 11px;
-    color: #666;
-    font-weight: bold;
-    font-family: 'Orbitron', sans-serif;
-}
-
-.footer-val {
-    color: #FFD700; /* Oro */
-    margin-left: 5px;
-}
-
-.up { color: #00ff88 !important; margin-left: 6px; font-size: 9px; }
-.down { color: #ff4444 !important; margin-left: 6px; font-size: 9px; }
-
-@keyframes ticker-animation {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-@keyframes status-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.9); }
-}
-/* BARRA INFERIOR BLINDADA */
-.footer-status-bar {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100vw !important;
-    height: 40px !important;
-    background: #000000 !important;
-    border-top: 1px solid #1a1a1a !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 15px !important;
-    z-index: 999999 !important; /* Capa máxima */
-    box-shadow: 0 -5px 20px rgba(0,0,0,1);
-}
-
-.status-dot {
-    height: 10px;
-    width: 10px;
-    background: #00ff00;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #00ff00;
-    animation: status-pulse 1.5s infinite;
-    margin-right: 12px;
-    flex-shrink: 0;
-}
-
-@keyframes status-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-}
-
-.ticker-container {
-    flex: 1;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.ticker-wrapper {
-    display: inline-block;
-    animation: ticker-animation 30s linear infinite;
-}
-
-.ticker-item {
-    display: inline-block;
-    padding: 0 35px;
-    font-size: 10px;
-    color: #666;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-}
-
-.footer-val { color: #FFD700; margin-left: 5px; }
-.up { color: #00ff88 !important; }
-.down { color: #ff4444 !important; }
-
-@keyframes ticker-animation {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-<div class="footer-status-bar">
-    <div class="status-dot"></div>
-    <div style="color: #00ff00; font-size: 10px; font-weight: bold; font-family: 'Orbitron'; margin-right: 15px;">LIVE</div>
-    <div class="ticker-container">
-        <div id="master-ticker" class="ticker-wrapper">
-            <span class="ticker-item">CONECTANDO A DOA TERMINAL...</span>
-        </div>
-    </div>
-    <div style="color:#222; font-size:9px; font-family:'Orbitron'; padding-left:15px;">PRO v2.6</div>
-</div>
-async function updateTicker() {
-    try {
-        const res = await fetch(`https://min-api.cryptocompare.com`);
-        const json = await res.json();
-        const data = json.RAW;
-        const container = document.getElementById('master-ticker');
-        
-        const format = (name, obj) => {
-            const p = obj.CHANGEPCT24HOUR;
-            const colorClass = p >= 0 ? 'up' : 'down';
-            return `<span class="ticker-item">${name}: <span class="footer-val">$${obj.PRICE.toLocaleString()}</span> <span class="${colorClass}">${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%</span></span>`;
-        };
-
-        const content = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + `<span class="ticker-item">⛽ GAS: <span class="footer-val">42.5 GWEI</span></span>`;
-        container.innerHTML = content + content;
-    } catch(e) { console.error("Error en ticker"); }
-}
 
 <!-- [MANTENIDO] SCRIPTS PUBLICIDAD -->
 <script src="https://kdmjzwq.com"></script>
