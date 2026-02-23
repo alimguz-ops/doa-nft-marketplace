@@ -17,65 +17,59 @@
     </script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E14Z7MFKB7');</script>
 
-    <!-- LIBRERÍAS DE DISEÑO Y WEB3 -->
+    <!-- LIBRERÍAS WEB3 Y DISEÑO -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com"></script>
     <script src="https://unpkg.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     
     <style>
-        :root { --gold: #FFD700; --neon: #ff00e6; --bg: #050505; --card: rgba(15, 15, 15, 0.9); }
+        :root { --gold: #FFD700; --neon: #ff00e6; --bg: #050505; --card: rgba(15, 15, 15, 0.95); }
         body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
+        .glass { background: var(--card); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; }
         
-        /* Sidebar Mejorada */
-        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 50px; background: #000; border-right: 1px solid #222; transition: 0.3s; z-index: 1000; overflow: hidden; }
-        .sidebar:hover { width: 180px; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
-        .nav-item { display: flex; align-items: center; padding: 18px 15px; color: #666; cursor: pointer; transition: 0.2s; text-decoration: none; }
-        .nav-item:hover { color: var(--gold); background: rgba(255,215,0,0.05); }
-        .nav-item span { margin-left: 20px; font-weight: bold; font-size: 0.7rem; opacity: 0; transition: 0.2s; }
+        /* Sidebar Compacta */
+        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 45px; background: #000; border-right: 1px solid #222; transition: 0.3s; z-index: 10001; overflow: hidden; }
+        .sidebar:hover { width: 170px; }
+        .nav-item { display: flex; align-items: center; padding: 15px 12px; color: #555; cursor: pointer; transition: 0.2s; white-space: nowrap; text-decoration: none; }
+        .nav-item span { margin-left: 20px; font-weight: bold; font-size: 0.75rem; opacity: 0; transition: 0.2s; font-family: 'Orbitron'; }
         .sidebar:hover .nav-item span { opacity: 1; }
+        .nav-item:hover { color: var(--gold); background: rgba(255, 215, 0, 0.05); }
 
-        /* Estilo Cristal (Glassmorphism) */
-        .glass { background: var(--card); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; }
-        .btn-main { background: var(--gold); color: #000; font-weight: bold; font-family: 'Orbitron'; font-size: 0.7rem; padding: 12px; border-radius: 8px; transition: 0.3s; width: 100%; text-transform: uppercase; }
-        .btn-main:hover { filter: brightness(1.2); transform: translateY(-2px); shadow: 0 5px 15px rgba(255,215,0,0.2); }
-
-        /* Ticker Animación */
+        /* Ticker Animation */
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .animate-ticker { display: inline-block; animation: ticker 40s linear infinite; }
-        .status-dot { height: 8px; width: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-        /* Inputs */
-        input { background: #0a0a0a !important; border: 1px solid #222 !important; color: var(--gold) !important; font-size: 0.8rem !important; outline: none !important; }
+        
+        input { background: #0a0a0a !important; border: 1px solid #222 !important; color: var(--gold) !important; padding: 10px; border-radius: 6px; width: 100%; outline: none; }
         input:focus { border-color: var(--gold) !important; }
+        .btn-main { background: var(--gold); color: #000; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: bold; padding: 12px; border-radius: 6px; width: 100%; transition: 0.3s; }
+        .btn-main:hover { filter: brightness(1.2); transform: scale(1.02); }
     </style>
 </head>
 <body>
 
 <nav class="sidebar">
-    <div class="py-6 text-center text-yellow-500 font-bold orbitron text-xl">DM</div>
+    <div style="padding: 15px; color: var(--gold); font-family: 'Orbitron'; font-weight: bold; text-align: center;">DM</div>
     <a class="nav-item"><i>📊</i><span>ANALÍTICA</span></a>
     <a class="nav-item"><i>🛒</i><span>MERCADO</span></a>
     <a class="nav-item"><i>💎</i><span>VIP ACCESO</span></a>
-    <a class="nav-item"><i>⚙️</i><span>AJUSTES</span></a>
 </nav>
 
-<main class="ml-[50px] p-4 md:p-8">
+<main class="ml-[45px] p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
         <!-- HEADER -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
-                <h1 class="orbitron text-3xl md:text-4xl font-bold text-yellow-400 tracking-tighter">DOA MONSTER</h1>
-                <p class="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Marketplace Elite Automatizado</p>
+                <h1 class="orbitron text-2xl md:text-3xl font-bold text-yellow-400 tracking-widest">DOA MONSTER</h1>
+                <p class="text-[9px] tracking-[0.4em] text-gray-500 uppercase">Automated NFT Ecosystem</p>
             </div>
-            <div class="glass px-6 py-3 flex items-center gap-6">
+            <div class="glass px-6 py-2 flex items-center gap-6">
                 <div class="text-right">
-                    <div id="walletAddr" class="orbitron text-[10px] text-yellow-600">0x...Desconectado</div>
-                    <div id="userBalance" class="font-bold text-sm">0.00 POL</div>
+                    <div id="walletAddr" class="orbitron text-[10px] text-yellow-600">0x...Disconnected</div>
+                    <div id="userBalance" class="font-bold text-xs">0.00 POL</div>
                 </div>
-                <button onclick="connect()" class="bg-yellow-400 text-black px-5 py-2 rounded-full font-bold orbitron text-[10px] hover:bg-yellow-300 transition-all">CONECTAR</button>
+                <button onclick="connect()" class="bg-yellow-400 text-black px-4 py-1.5 rounded-full font-bold orbitron text-[9px] hover:bg-yellow-300 transition-all">CONECTAR</button>
             </div>
         </header>
 
@@ -86,74 +80,64 @@
 
         <!-- TENDENCIAS -->
         <h2 class="orbitron text-pink-500 text-[10px] tracking-widest mb-4">🔥 TENDENCIAS LIVE</h2>
-        <div class="overflow-hidden mb-8 relative rounded-xl">
+        <div class="overflow-hidden mb-10 rounded-xl relative">
             <div id="nftCarousel" class="flex gap-4 transition-transform duration-500"></div>
         </div>
 
-        <!-- ACCIONES GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <!-- BUSCADOR -->
+        <!-- ACCIONES -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+            <!-- LISTAR -->
             <div class="glass p-6 lg:col-span-2">
-                <h3 class="orbitron text-xs text-yellow-500 mb-4 uppercase">🔍 Explorar Mercado</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input type="text" id="nftSearch" class="p-3 rounded-lg" placeholder="Contrato o ID...">
-                    <input type="number" id="minPrice" class="p-3 rounded-lg" placeholder="Mín POL">
-                    <input type="number" id="maxPrice" class="p-3 rounded-lg" placeholder="Máx POL">
+                <h3 class="orbitron text-[11px] text-yellow-500 mb-6 uppercase tracking-widest">🚀 Publicar Activo</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-3">
+                        <input type="text" id="nftAddr" placeholder="Contrato 0x...">
+                        <input type="number" id="tokenId" placeholder="Token ID">
+                        <input type="text" id="price" placeholder="Precio en POL">
+                        <button onclick="listNFTAction()" class="btn-main">LISTAR AHORA</button>
+                    </div>
+                    <div id="nftPreview" class="border border-dashed border-gray-800 rounded-lg h-[160px] flex items-center justify-center text-[10px] text-gray-600 orbitron uppercase">
+                        Preview
+                    </div>
                 </div>
             </div>
 
             <!-- VIP -->
-            <div class="glass p-6 border-l-4 border-pink-600">
-                <h3 class="orbitron text-xs text-pink-500 mb-2 uppercase tracking-tighter">💎 AFILIACIÓN PRO (VIP)</h3>
-                <p class="text-[11px] text-gray-400 mb-4">Acceso a preventas y comisiones 0%. <br><span class="text-yellow-500 font-bold">0.1 POL / 30 Días</span></p>
-                <button onclick="buyVipAction()" class="btn-main !bg-pink-600 !text-white hover:!bg-pink-500">ACTIVAR VIP</button>
-                <div id="countdown" class="text-[9px] text-center mt-2 opacity-30 orbitron">ESTADO: INACTIVO</div>
-            </div>
-
-            <!-- PUBLICAR NFT -->
-            <div class="glass p-6 lg:col-span-3">
-                <h3 class="orbitron text-xs text-yellow-500 mb-6 uppercase">🚀 PUBLICAR ACTIVO EN EL MERCADO</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-4">
-                        <input type="text" id="nftAddr" class="p-3 rounded-lg w-full" placeholder="Dirección Contrato 0x...">
-                        <input type="number" id="tokenId" class="p-3 rounded-lg w-full" placeholder="Token ID">
-                        <input type="text" id="price" class="p-3 rounded-lg w-full" placeholder="Precio en POL">
-                        <button onclick="listNFTAction()" class="btn-main">PUBLICAR AHORA</button>
-                    </div>
-                    <div id="nftPreview" class="border-2 border-dashed border-gray-800 rounded-xl h-[180px] flex items-center justify-center text-[10px] text-gray-600 orbitron">
-                        VISTA PREVIA DEL ACTIVO
-                    </div>
+            <div class="glass p-6 border-l-4 border-pink-600 flex flex-col justify-between">
+                <div>
+                    <h3 class="orbitron text-[11px] text-pink-500 mb-2 uppercase">💎 AFILIACIÓN PRO</h3>
+                    <p class="text-[11px] text-gray-400 leading-relaxed">Acceso a preventas y comisiones 0%. <br><span class="text-yellow-500 font-bold">Costo: 0.1 POL / 30 Días</span></p>
                 </div>
+                <button onclick="buyVipAction()" class="btn-main !bg-pink-600 !text-white mt-4 hover:!bg-pink-500">ACTIVAR VIP</button>
             </div>
         </div>
 
-        <!-- MERCADO GLOBAL -->
-        <h2 class="orbitron text-yellow-500 text-xs tracking-widest mb-6 border-l-2 border-yellow-500 pl-4">🏪 MERCADO GLOBAL NFT</h2>
-        <div id="nftGallery" class="glass p-20 text-center text-xs text-gray-700 orbitron tracking-widest uppercase">
-            Sincronizando con la red Polygon...
+        <!-- MERCADO -->
+        <h2 class="orbitron text-yellow-500 text-[11px] tracking-widest mb-6 border-l-2 border-yellow-500 pl-4">🏪 MERCADO GLOBAL</h2>
+        <div id="nftGallery" class="glass py-20 text-center text-[10px] text-gray-700 orbitron uppercase tracking-[0.3em]">
+            Sincronizando con Polygon Mainnet...
         </div>
 
-        <footer class="py-20 text-center opacity-20 orbitron text-[9px] tracking-[0.6em]">
-            DOA MONSTER PLATFORM 2026 • SSL ENCRIPTADO • ANTIFRAUDE ACTIVO
+        <footer class="py-20 text-center opacity-20 orbitron text-[9px] tracking-[0.5em]">
+            DOA MONSTER PLATFORM 2026 • SSL ENCRYPTED
         </footer>
     </div>
 </main>
 
-<!-- BARRA DE ESTADO INFERIOR -->
-<div class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/5 h-10 flex items-center px-4 z-[2000]">
+<!-- BARRA DE ESTADO -->
+<div class="fixed bottom-0 left-0 w-full bg-black border-t border-white/5 h-10 flex items-center px-4 z-[10000]">
     <div class="flex items-center gap-2 border-r border-gray-800 pr-4">
-        <div class="status-dot"></div>
-        <span class="orbitron text-[9px] font-bold text-green-500">LIVE</span>
+        <div class="h-2 w-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></div>
+        <span class="orbitron text-[9px] font-bold text-green-500 uppercase">Live</span>
     </div>
     <div class="flex-1 overflow-hidden">
         <div id="master-ticker" class="animate-ticker whitespace-nowrap px-4">
-            <!-- Se llena con JS -->
+            <!-- Se llena con updateTicker() -->
         </div>
     </div>
-    <div class="text-[9px] orbitron font-bold text-gray-700 pl-4 border-l border-gray-800">PRO v2.6.5</div>
+    <div class="text-[9px] orbitron font-bold text-gray-700 pl-4 border-l border-gray-800 uppercase">PRO v2.6</div>
 </div>
 
-<!-- SCRIPTS DE LÓGICA -->
 <script>
     const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
     const INFURA_ID = "3702e6360508431a9c9f2bf02450db30";
@@ -175,7 +159,7 @@
         }
     }
 
-    // 2. TICKER REAL
+    // 2. TICKER REAL (CORREGIDO)
     async function updateTicker() {
         try {
             const res = await fetch(`https://min-api.cryptocompare.com`);
@@ -189,11 +173,11 @@
                 return `<span class="px-6 text-[10px] text-gray-500 orbitron uppercase">${name}: <b class="text-yellow-400">$${obj.PRICE.toLocaleString()}</b> <span style="color:${color}">${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%</span></span>`;
             };
 
-            container.innerHTML = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + 
-            `<span class="px-6 text-[10px] text-gray-500 orbitron">⛽ GAS: <b class="text-yellow-400">${(Math.random()*40+60).toFixed(1)}</b> GWEI</span>` +
-            `<span class="px-6 text-[10px] text-gray-600 orbitron">🛡️ TERMINAL DOA: 0x4C13...4694 ACTIVO</span>`;
+            const content = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + 
+            `<span class="px-6 text-[10px] text-gray-500 orbitron uppercase">⛽ GAS: <b class="text-yellow-400">${(Math.random()*40+60).toFixed(1)}</b> GWEI</span>` +
+            `<span class="px-6 text-[10px] text-gray-600 orbitron uppercase">🛡️ DOA TERMINAL ACTIVA</span>`;
             
-            if(!container.dataset.cloned) { container.innerHTML += container.innerHTML; container.dataset.cloned=true; }
+            container.innerHTML = content + content;
         } catch(e) { console.log("Ticker Error"); }
     }
 
@@ -210,7 +194,7 @@
         chart.timeScale().fitContent();
     }
 
-    // 4. PREVIEW NFT
+    // 4. PREVIEW NFT (CORREGIDO)
     async function fetchNFTPreview() {
         const address = document.getElementById('nftAddr').value;
         const id = document.getElementById('tokenId').value;
@@ -221,9 +205,11 @@
                 const abi = ["function tokenURI(uint256) view returns (string)"];
                 const contract = new ethers.Contract(address, abi, readProvider);
                 const uri = await contract.tokenURI(id);
-                const meta = await fetch(uri.replace("ipfs://", "https://ipfs.io")).then(r => r.json());
-                preview.innerHTML = `<img src="${meta.image.replace("ipfs://", "https://ipfs.io")}" class="h-full rounded-lg object-contain p-2">`;
-            } catch (e) { preview.innerText = "Error cargando Metadata"; }
+                const gateway = uri.replace("ipfs://", "https://ipfs.io");
+                const meta = await fetch(gateway).then(r => r.json());
+                const img = meta.image.replace("ipfs://", "https://ipfs.io");
+                preview.innerHTML = `<img src="${img}" class="h-full rounded-lg object-contain p-2">`;
+            } catch (e) { preview.innerText = "Metadata Error"; }
         }
     }
 
@@ -234,7 +220,7 @@
             const abi = ["function listNFT(address,uint256,uint256) public"];
             const contract = new ethers.Contract(MAIN_CONTRACT, abi, signer);
             const priceVal = ethers.parseEther(document.getElementById('price').value);
-            const tx = await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, priceVal);
+            await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, priceVal);
             alert("Listado enviado!");
         } catch(e) { alert("Error en transacción"); }
     }
@@ -242,12 +228,11 @@
     async function buyVipAction() {
         if(!signer) return alert("Conecta tu wallet");
         try {
-            const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
-            alert("Pago enviado. Activando VIP...");
-        } catch(e) { alert("Error en pago VIP"); }
+            await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
+            alert("Pago VIP enviado!");
+        } catch(e) { alert("Error en pago"); }
     }
 
-    // INICIALIZACIÓN
     document.addEventListener('DOMContentLoaded', () => {
         initChart();
         updateTicker();
@@ -257,25 +242,25 @@
         
         const car = document.getElementById('nftCarousel');
         for(let i=0; i<15; i++) {
-            car.innerHTML += `<div class="min-w-[200px] glass p-4 text-center">
-                <div class="text-3xl mb-2">👾</div>
-                <div class="orbitron text-[9px] text-yellow-500 font-bold mb-1 uppercase">Monster #${500+i}</div>
-                <div class="text-[10px] font-bold tracking-tighter">${(Math.random()*1.5).toFixed(2)} POL</div>
+            car.innerHTML += `<div class="min-w-[180px] glass p-4 text-center">
+                <div class="text-2xl mb-2">👾</div>
+                <div class="orbitron text-[8px] text-yellow-500 font-bold mb-1 uppercase">Monster #${500+i}</div>
+                <div class="text-[9px] font-bold">${(Math.random()*1.5).toFixed(2)} POL</div>
             </div>`;
         }
         let pos = 0;
         setInterval(() => {
-            pos += 216;
+            pos += 196;
             if (pos >= car.scrollWidth - 800) pos = 0;
             car.style.transform = `translateX(-${pos}px)`;
         }, 4000);
     });
 </script>
 
-<!-- [MANTENIDO] SCRIPTS EXTERNOS DE PUBLICIDAD -->
+<!-- [MANTENIDO] SCRIPTS PUBLICIDAD -->
 <script src="https://kdmjzwq.com"></script>
 <script src="https://kdmjzwq.com"></script>
-<script src="https://pl28693298.effectivegatecpm.com"></script>
+<script src="https://pl28693298.effectivegatecpm.com/d5/8d/c9/d58dc9110d4b60bc79c3c0f6f93822e4.js"></script>
 
 </body>
 </html>
