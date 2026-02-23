@@ -289,6 +289,161 @@
         <div style="color:#222; font-size:10px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #111; padding-left:20px; white-space:nowrap;">PRO v2.6</div>
     </div>
 
+/* FUERZA LA APARICIÓN DE LA BARRA INFERIOR */
+.footer-status-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 40px !important;
+    background: #000000 !important;
+    border-top: 1px solid #1a1a1a !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+    z-index: 99999 !important; /* Estar por encima de todo */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
+}
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #00ff00;
+    animation: status-pulse 1.5s infinite;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.ticker-container {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-animation 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 40px;
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.footer-val {
+    color: #FFD700; /* Oro */
+    margin-left: 5px;
+}
+
+.up { color: #00ff88 !important; margin-left: 6px; font-size: 9px; }
+.down { color: #ff4444 !important; margin-left: 6px; font-size: 9px; }
+
+@keyframes ticker-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.9); }
+}
+/* BARRA INFERIOR BLINDADA */
+.footer-status-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 40px !important;
+    background: #000000 !important;
+    border-top: 1px solid #1a1a1a !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 15px !important;
+    z-index: 999999 !important; /* Capa máxima */
+    box-shadow: 0 -5px 20px rgba(0,0,0,1);
+}
+
+.status-dot {
+    height: 10px;
+    width: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ff00;
+    animation: status-pulse 1.5s infinite;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.ticker-container {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    animation: ticker-animation 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 35px;
+    font-size: 10px;
+    color: #666;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+}
+
+.footer-val { color: #FFD700; margin-left: 5px; }
+.up { color: #00ff88 !important; }
+.down { color: #ff4444 !important; }
+
+@keyframes ticker-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+<div class="footer-status-bar">
+    <div class="status-dot"></div>
+    <div style="color: #00ff00; font-size: 10px; font-weight: bold; font-family: 'Orbitron'; margin-right: 15px;">LIVE</div>
+    <div class="ticker-container">
+        <div id="master-ticker" class="ticker-wrapper">
+            <span class="ticker-item">CONECTANDO A DOA TERMINAL...</span>
+        </div>
+    </div>
+    <div style="color:#222; font-size:9px; font-family:'Orbitron'; padding-left:15px;">PRO v2.6</div>
+</div>
+async function updateTicker() {
+    try {
+        const res = await fetch(`https://min-api.cryptocompare.com`);
+        const json = await res.json();
+        const data = json.RAW;
+        const container = document.getElementById('master-ticker');
+        
+        const format = (name, obj) => {
+            const p = obj.CHANGEPCT24HOUR;
+            const colorClass = p >= 0 ? 'up' : 'down';
+            return `<span class="ticker-item">${name}: <span class="footer-val">$${obj.PRICE.toLocaleString()}</span> <span class="${colorClass}">${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%</span></span>`;
+        };
+
+        const content = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + `<span class="ticker-item">⛽ GAS: <span class="footer-val">42.5 GWEI</span></span>`;
+        container.innerHTML = content + content;
+    } catch(e) { console.error("Error en ticker"); }
+}
+
 <!-- [MANTENIDO] SCRIPTS PUBLICIDAD -->
 <script src="https://kdmjzwq.com"></script>
 <script src="https://kdmjzwq.com"></script>
