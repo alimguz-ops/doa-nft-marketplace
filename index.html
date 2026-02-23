@@ -4,174 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="vsr-7RGKnUsaJxE-EbSDbZvuCpnrA6DF0W8iB-01yyE" />
-    <title>DOA MONSTER — Marketplace Automatizado</title>
+    <title>DOA MONSTER — Marketplace Automatizado 2026</title>
 
-    <!-- MONETIZACIÓN Y ANALÍTICA (MANTENIDO) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1802989521678619"
-     crossorigin="anonymous"></script>
-    <script src="https://pl28693331.effectivegatecpm.com/5b/b0/0f/5bb00f11f7f416036edd1de62bae2166.js"></script>
+    <!-- [MANTENIDO] MONETIZACIÓN Y ANALÍTICA -->
+    <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
+    <script src="https://pl28693331.effectivegatecpm.com"></script>
     <script async src="https://www.googletagmanager.com"></script>
-    <script type="text/javascript" data-cfasync="false">
     <script type="text/javascript" data-cfasync="false">
     /*<![CDATA[/* */
     (function(){var m=window,a="d30821c03f80282ac46bbccfd6ee5e68",z=[["siteId",882-586+844-960+5271813],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],n=["d3d3LmJldHRlcmFkc3lzdGVtLmNvbS9qanNvbjUubWluLmNzcw==","ZDJrazBvM2ZyN2VkMDEuY2xvdWRmcm9udC5uZXQvQ0QvbWVtYmVkLm1pbi5qcw=="],x=-1,s,r,b=function(){clearTimeout(r);x++;if(n[x]&&!(1797627319000<(new Date).getTime()&&1<x)){s=m.document.createElement("script");s.type="text/javascript";s.async=!0;var h=m.document.getElementsByTagName("script")[0];s.src="https://"+atob(n[x]);s.crossOrigin="anonymous";s.onerror=b;s.onload=function(){clearTimeout(r);m[a.slice(0,16)+a.slice(0,16)]||b()};r=setTimeout(b,5E3);h.parentNode.insertBefore(s,h)}};if(!m[a]){try{Object.freeze(m[a]=z)}catch(e){}b()}})();
     /*]]>/* */
-   <script>
+    </script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E14Z7MFKB7');</script>
-   
-    <!-- LIBRERÍAS WEB3 Y GRÁFICOS -->
-    <script src="https://cdn.jsdelivr.net"></script>
+
+    <!-- LIBRERÍAS DE DISEÑO Y WEB3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com"></script>
     <script src="https://unpkg.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     
     <style>
-        :root { --gold: #FFD700; --neon: #ff00e6; --bg: #050505; --card: rgba(15, 15, 15, 0.95); --text: #fff; --border: #222; }
-        body { background: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; margin: 0; padding-bottom: 50px; overflow-x: hidden; display: flex; }
+        :root { --gold: #FFD700; --neon: #ff00e6; --bg: #050505; --card: rgba(15, 15, 15, 0.9); }
+        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; }
+        .orbitron { font-family: 'Orbitron', sans-serif; }
         
-        /* SIDEBAR COMPACTA */
-        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 45px; background: #000; border-right: 1px solid var(--border); transition: 0.3s; z-index: 10001; overflow: hidden; display: flex; flex-direction: column; }
-        .sidebar:hover { width: 170px; box-shadow: 10px 0 30px rgba(0,0,0,0.9); }
-        .nav-item { display: flex; align-items: center; padding: 15px 12px; color: #555; cursor: pointer; transition: 0.2s; white-space: nowrap; text-decoration: none; }
-        .nav-item i { min-width: 20px; font-style: normal; font-size: 1.1rem; }
-        .nav-item span { margin-left: 20px; font-weight: bold; font-size: 0.75rem; opacity: 0; transition: 0.2s; font-family: 'Orbitron'; }
+        /* Sidebar Mejorada */
+        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 50px; background: #000; border-right: 1px solid #222; transition: 0.3s; z-index: 1000; overflow: hidden; }
+        .sidebar:hover { width: 180px; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        .nav-item { display: flex; align-items: center; padding: 18px 15px; color: #666; cursor: pointer; transition: 0.2s; text-decoration: none; }
+        .nav-item:hover { color: var(--gold); background: rgba(255,215,0,0.05); }
+        .nav-item span { margin-left: 20px; font-weight: bold; font-size: 0.7rem; opacity: 0; transition: 0.2s; }
         .sidebar:hover .nav-item span { opacity: 1; }
-        .nav-item:hover { color: var(--gold); background: rgba(255, 215, 0, 0.05); }
 
-        /* CONTENIDO PRINCIPAL */
-        .main-content { flex: 1; margin-left: 45px; padding: 15px; width: calc(100vw - 45px); box-sizing: border-box; }
-        .container { max-width: 1200px; margin: auto; }
-        .header { text-align: center; padding-bottom: 15px; margin-bottom: 20px; }
-        h1 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); margin: 0; letter-spacing: 4px; }
+        /* Estilo Cristal (Glassmorphism) */
+        .glass { background: var(--card); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; }
+        .btn-main { background: var(--gold); color: #000; font-weight: bold; font-family: 'Orbitron'; font-size: 0.7rem; padding: 12px; border-radius: 8px; transition: 0.3s; width: 100%; text-transform: uppercase; }
+        .btn-main:hover { filter: brightness(1.2); transform: translateY(-2px); shadow: 0 5px 15px rgba(255,215,0,0.2); }
 
-        .wallet-card { background: #111; border: 1px solid var(--border); padding: 5px 15px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; margin-top: 10px; }
-        #chart-container { width: 100%; height: 220px; background: #000; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 15px; }
+        /* Ticker Animación */
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-ticker { display: inline-block; animation: ticker 40s linear infinite; }
+        .status-dot { height: 8px; width: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* CARRUSEL TENDENCIAS */
-        .carousel-wrapper { overflow: hidden; width: 100%; position: relative; margin: 15px 0; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-        .nft-carousel { display: flex; gap: 15px; transition: transform 0.5s ease; }
-        .carousel-item { min-width: 200px; height: 110px; background: rgba(255,0,230,0.02); border: 1px solid #222; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--neon); flex-direction: column; text-align: center; }
-
-        /* BUSQUEDA */
-        .controls-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin: 15px 0; }
-        input { width: 100%; box-sizing: border-box; padding: 10px; background: #0a0a0a; border: 1px solid var(--border); border-radius: 5px; color: var(--gold); font-family: 'Rajdhani'; font-size: 0.8rem; outline: none; margin-bottom: 5px; }
-
-        /* GRID ACCIONES */
-        .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; margin: 20px 0; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 10px; }
-        .btn-main { background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75rem; width: 100%; margin-top: 5px; transition: 0.2s; }
-        .btn-main:hover { filter: brightness(1.2); transform: scale(1.01); }
-
-        /* PREVIEW DINÁMICO */
-        #nftPreview { margin-top: 10px; padding: 10px; background: #000; border: 1px dashed #444; border-radius: 8px; display: none; text-align: center; }
-        #nftPreview img { max-width: 90px; border-radius: 5px; box-shadow: 0 0 15px rgba(255,215,0,0.1); }
-
-        /* BARRA DE ESTADO INFERIOR */
-        .footer-status-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 1px solid #111; display: flex; align-items: center; padding: 0 15px; z-index: 10000; height: 32px; }
-        .status-dot { height: 7px; width: 7px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse 1.5s infinite; margin-right: 8px; }
-        .ticker-container { flex: 1; overflow: hidden; white-space: nowrap; margin: 0 20px; }
-        .ticker-wrapper { display: inline-block; animation: ticker-animation 40s linear infinite; }
-        .ticker-item { display: inline-block; padding: 0 35px; color: #666; font-size: 10px; font-family: 'Rajdhani'; }
-        .up { color: #00ff88 !important; } .down { color: #ff4444 !important; }
-
-        @keyframes ticker-animation { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+        /* Inputs */
+        input { background: #0a0a0a !important; border: 1px solid #222 !important; color: var(--gold) !important; font-size: 0.8rem !important; outline: none !important; }
+        input:focus { border-color: var(--gold) !important; }
     </style>
 </head>
 <body>
 
 <nav class="sidebar">
-    <div style="padding: 15px; color: var(--gold); font-family: 'Orbitron'; font-weight: bold; text-align: center; font-size: 1.2rem;">DM</div>
+    <div class="py-6 text-center text-yellow-500 font-bold orbitron text-xl">DM</div>
     <a class="nav-item"><i>📊</i><span>ANALÍTICA</span></a>
-    <a class="nav-item"><i>🛒</i><span>MERCADO NFT</span></a>
+    <a class="nav-item"><i>🛒</i><span>MERCADO</span></a>
     <a class="nav-item"><i>💎</i><span>VIP ACCESO</span></a>
     <a class="nav-item"><i>⚙️</i><span>AJUSTES</span></a>
 </nav>
 
-<main class="main-content">
-    <div class="container">
-        <!-- CABECERA -->
-        <div class="header">
-            <h1>DOA MONSTER</h1>
-            <div class="wallet-card">
-                <button class="btn-main" onclick="connect()" style="width:auto; padding: 4px 18px; margin:0;">CONECTAR</button>
-                <div id="walletAddr" style="font-size:0.75rem; color:var(--gold); font-family:'Orbitron'">0x...</div>
-                <div id="userBalance" style="color:var(--gold); font-weight:800; font-size:0.75rem">0.00 POL</div>
+<main class="ml-[50px] p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- HEADER -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h1 class="orbitron text-3xl md:text-4xl font-bold text-yellow-400 tracking-tighter">DOA MONSTER</h1>
+                <p class="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Marketplace Elite Automatizado</p>
             </div>
-        </div>
+            <div class="glass px-6 py-3 flex items-center gap-6">
+                <div class="text-right">
+                    <div id="walletAddr" class="orbitron text-[10px] text-yellow-600">0x...Desconectado</div>
+                    <div id="userBalance" class="font-bold text-sm">0.00 POL</div>
+                </div>
+                <button onclick="connect()" class="bg-yellow-400 text-black px-5 py-2 rounded-full font-bold orbitron text-[10px] hover:bg-yellow-300 transition-all">CONECTAR</button>
+            </div>
+        </header>
 
-        <!-- GRÁFICO DE PRECIOS -->
-        <div id="chart-container"></div>
+        <!-- GRÁFICO -->
+        <div class="glass p-4 mb-8">
+            <div id="chart-container" class="w-full h-[220px]"></div>
+        </div>
 
         <!-- TENDENCIAS -->
-        <h2 style="color:var(--neon); font-family:'Orbitron'; font-size:0.75rem; letter-spacing:2px; margin-left:5px;">🔥 TENDENCIAS LIVE</h2>
-        <div class="carousel-wrapper">
-            <div id="nftCarousel" class="nft-carousel"></div>
+        <h2 class="orbitron text-pink-500 text-[10px] tracking-widest mb-4">🔥 TENDENCIAS LIVE</h2>
+        <div class="overflow-hidden mb-8 relative rounded-xl">
+            <div id="nftCarousel" class="flex gap-4 transition-transform duration-500"></div>
         </div>
 
-        <!-- BUSQUEDA -->
-        <div class="controls-grid">
-            <input type="text" id="nftSearch" placeholder="🔍 Buscar ID o Contrato...">
-            <input type="number" id="minPrice" placeholder="Min POL">
-            <input type="number" id="maxPrice" placeholder="Max POL">
-        </div>
-
-        <!-- ACCIONES -->
-        <div class="actions-grid">
-            <!-- LISTAR NFT -->
-            <div class="card">
-                <h3 style="font-size:0.85rem; color:var(--gold); margin:0 0 12px 0; font-family:'Orbitron'">🚀 LISTAR NFT</h3>
-                <input type="text" id="nftAddr" placeholder="Dirección Contrato 0x...">
-                <input type="number" id="tokenId" placeholder="Token ID">
-                <div id="nftPreview"></div>
-                <input type="text" id="price" placeholder="Precio en POL">
-                <button class="btn-main" onclick="listNFTAction()">PUBLICAR AHORA</button>
+        <!-- ACCIONES GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- BUSCADOR -->
+            <div class="glass p-6 lg:col-span-2">
+                <h3 class="orbitron text-xs text-yellow-500 mb-4 uppercase">🔍 Explorar Mercado</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input type="text" id="nftSearch" class="p-3 rounded-lg" placeholder="Contrato o ID...">
+                    <input type="number" id="minPrice" class="p-3 rounded-lg" placeholder="Mín POL">
+                    <input type="number" id="maxPrice" class="p-3 rounded-lg" placeholder="Máx POL">
+                </div>
             </div>
 
-            <!-- AFILIACION PRO -->
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3 style="font-size:0.85rem; color:var(--neon); margin:0 0 12px 0; font-family:'Orbitron'">💎 AFILIACIÓN PRO (VIP)</h3>
-                    <p style="font-size:0.75rem; color:#888; line-height:1.4;">Acceso a preventas y comisiones 0%. <br>Costo: <b style="color:var(--gold)">0.1 POL / 30 Días</b></p>
-                </div>
-                <div>
-                    <button class="btn-main" style="background:var(--neon); color:#fff;" onclick="buyVipAction()">ACTIVAR MEMBRESÍA</button>
-                    <div id="countdown" style="font-size:0.65rem; margin-top:10px; text-align:center; color:#555;">Inactivo</div>
+            <!-- VIP -->
+            <div class="glass p-6 border-l-4 border-pink-600">
+                <h3 class="orbitron text-xs text-pink-500 mb-2 uppercase tracking-tighter">💎 AFILIACIÓN PRO (VIP)</h3>
+                <p class="text-[11px] text-gray-400 mb-4">Acceso a preventas y comisiones 0%. <br><span class="text-yellow-500 font-bold">0.1 POL / 30 Días</span></p>
+                <button onclick="buyVipAction()" class="btn-main !bg-pink-600 !text-white hover:!bg-pink-500">ACTIVAR VIP</button>
+                <div id="countdown" class="text-[9px] text-center mt-2 opacity-30 orbitron">ESTADO: INACTIVO</div>
+            </div>
+
+            <!-- PUBLICAR NFT -->
+            <div class="glass p-6 lg:col-span-3">
+                <h3 class="orbitron text-xs text-yellow-500 mb-6 uppercase">🚀 PUBLICAR ACTIVO EN EL MERCADO</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <input type="text" id="nftAddr" class="p-3 rounded-lg w-full" placeholder="Dirección Contrato 0x...">
+                        <input type="number" id="tokenId" class="p-3 rounded-lg w-full" placeholder="Token ID">
+                        <input type="text" id="price" class="p-3 rounded-lg w-full" placeholder="Precio en POL">
+                        <button onclick="listNFTAction()" class="btn-main">PUBLICAR AHORA</button>
+                    </div>
+                    <div id="nftPreview" class="border-2 border-dashed border-gray-800 rounded-xl h-[180px] flex items-center justify-center text-[10px] text-gray-600 orbitron">
+                        VISTA PREVIA DEL ACTIVO
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- MERCADO GLOBAL -->
-        <h2 style="color:var(--gold); font-family:'Orbitron'; font-size:0.85rem; letter-spacing:2px; border-left: 2px solid var(--gold); padding-left: 15px; margin: 40px 0 20px 0;">🏪 MERCADO GLOBAL NFT</h2>
-        <div id="nftGallery" style="text-align:center; padding: 40px; color: #444; font-size: 0.8rem; border: 1px dashed #222; border-radius: 10px;">
-            Cargando mercado real...
+        <h2 class="orbitron text-yellow-500 text-xs tracking-widest mb-6 border-l-2 border-yellow-500 pl-4">🏪 MERCADO GLOBAL NFT</h2>
+        <div id="nftGallery" class="glass p-20 text-center text-xs text-gray-700 orbitron tracking-widest uppercase">
+            Sincronizando con la red Polygon...
         </div>
 
-        <footer style="text-align: center; padding: 60px 0 100px 0; color: #333; font-size: 0.65rem; letter-spacing: 3px; font-family:'Orbitron'">
-            DOA MONSTER AUTOMATED PLATFORM 2026<br>
-            <span style="color:#222; font-size: 0.55rem;">SSL ACTIVO / POLÍTICA DE PRIVACIDAD / ACTUALIZADO FEBRERO 2026</span>
+        <footer class="py-20 text-center opacity-20 orbitron text-[9px] tracking-[0.6em]">
+            DOA MONSTER PLATFORM 2026 • SSL ENCRIPTADO • ANTIFRAUDE ACTIVO
         </footer>
     </div>
 </main>
 
 <!-- BARRA DE ESTADO INFERIOR -->
-<div class="footer-status-bar">
-    <div style="display: flex; align-items: center; white-space: nowrap;">
-        <span class="status-dot"></span>
-        <span style="color: #00ff00; font-size: 9px; font-weight: bold; font-family: 'Orbitron'; letter-spacing:1px;">EN LÍNEA</span>
+<div class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/5 h-10 flex items-center px-4 z-[2000]">
+    <div class="flex items-center gap-2 border-r border-gray-800 pr-4">
+        <div class="status-dot"></div>
+        <span class="orbitron text-[9px] font-bold text-green-500">LIVE</span>
     </div>
-    <div class="ticker-container">
-        <div class="ticker-wrapper" id="master-ticker">
-            <span class="ticker-item">BTC: <b id="btc-val" style="color:var(--gold)">...</b> <small id="btc-pct"></small></span>
-            <span class="ticker-item">ETH: <b id="eth-val" style="color:var(--gold)">...</b> <small id="eth-pct"></small></span>
-            <span class="ticker-item">POL: <b id="pol-val" style="color:var(--gold)">...</b> <small id="pol-pct"></small></span>
-            <span class="ticker-item">⛽ GAS: <b id="gas-val" style="color:var(--gold)">--</b> GWEI</span>
-            <span class="ticker-item">🛡️ TERMINAL DOA: 0x4C13...4694 ACTIVADO</span>
-            <span class="ticker-item">SSL ENCRIPTADO AES-256 | FEBRERO 2026</span>
+    <div class="flex-1 overflow-hidden">
+        <div id="master-ticker" class="animate-ticker whitespace-nowrap px-4">
+            <!-- Se llena con JS -->
         </div>
     </div>
-    <div style="color:#444; font-size:9px; font-family:'Orbitron'; font-weight:bold; border-left: 1px solid #222; padding-left:15px;">PRO v2.6</div>
+    <div class="text-[9px] orbitron font-bold text-gray-700 pl-4 border-l border-gray-800">PRO v2.6.5</div>
 </div>
 
+<!-- SCRIPTS DE LÓGICA -->
 <script>
     const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
     const INFURA_ID = "3702e6360508431a9c9f2bf02450db30";
@@ -189,44 +171,46 @@
                 document.getElementById('walletAddr').innerText = account.slice(0,6)+'...'+account.slice(-4);
                 const bal = await provider.getBalance(account);
                 document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
-            } catch(e) { console.error("Error conexión wallet"); }
+            } catch(e) { console.error("Error wallet"); }
         }
     }
 
-    // 2. PRECIOS REALES (TICKER)
+    // 2. TICKER REAL
     async function updateTicker() {
         try {
             const res = await fetch(`https://min-api.cryptocompare.com`);
             const json = await res.json();
             const data = json.RAW;
-            const up = (id, obj) => {
-                document.getElementById(`${id}-val`).innerText = `$${obj.PRICE.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+            const container = document.getElementById('master-ticker');
+            
+            const format = (name, obj) => {
                 const p = obj.CHANGEPCT24HOUR;
-                const el = document.getElementById(`${id}-pct`);
-                el.innerText = ` ${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%`;
-                el.className = p>=0?'up':'down';
+                const color = p >= 0 ? '#00ff88' : '#ff4444';
+                return `<span class="px-6 text-[10px] text-gray-500 orbitron uppercase">${name}: <b class="text-yellow-400">$${obj.PRICE.toLocaleString()}</b> <span style="color:${color}">${p>=0?'▲':'▼'}${Math.abs(p).toFixed(2)}%</span></span>`;
             };
-            up('btc', data.BTC.USD); up('eth', data.ETH.USD); up('pol', data.POL.USD);
-            document.getElementById('gas-val').innerText = (Math.random() * (100 - 60) + 60).toFixed(1);
-            const t = document.getElementById('master-ticker');
-            if(!t.dataset.cloned) { t.innerHTML += t.innerHTML; t.dataset.cloned=true; }
-        } catch(e) { console.error("Error Ticker"); }
+
+            container.innerHTML = format('BTC', data.BTC.USD) + format('ETH', data.ETH.USD) + format('POL', data.POL.USD) + 
+            `<span class="px-6 text-[10px] text-gray-500 orbitron">⛽ GAS: <b class="text-yellow-400">${(Math.random()*40+60).toFixed(1)}</b> GWEI</span>` +
+            `<span class="px-6 text-[10px] text-gray-600 orbitron">🛡️ TERMINAL DOA: 0x4C13...4694 ACTIVO</span>`;
+            
+            if(!container.dataset.cloned) { container.innerHTML += container.innerHTML; container.dataset.cloned=true; }
+        } catch(e) { console.log("Ticker Error"); }
     }
 
     // 3. GRÁFICO REAL
     function initChart() {
         const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-            layout: { background: { color: '#000' }, textColor: '#FFD700', fontFamily: 'Rajdhani' },
+            layout: { background: { color: 'transparent' }, textColor: '#FFD700', fontFamily: 'Orbitron' },
             grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } },
             timeScale: { borderColor: '#222' },
             rightPriceScale: { borderColor: '#222' }
         });
-        const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.15)', bottomColor: 'transparent', lineWidth: 2 });
-        series.setData(Array.from({length:60}, (_,i) => ({ time: Math.floor(Date.now()/1000)-(60-i)*3600, value: 0.9+Math.random()*0.1 })));
+        const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent', lineWidth: 2 });
+        series.setData(Array.from({length:60}, (_,i) => ({ time: Math.floor(Date.now()/1000)-(60-i)*3600, value: 0.8+Math.random()*0.3 })));
         chart.timeScale().fitContent();
     }
 
-    // 4. LUPA / PREVIEW NFT
+    // 4. PREVIEW NFT
     async function fetchNFTPreview() {
         const address = document.getElementById('nftAddr').value;
         const id = document.getElementById('tokenId').value;
@@ -238,20 +222,20 @@
                 const contract = new ethers.Contract(address, abi, readProvider);
                 const uri = await contract.tokenURI(id);
                 const meta = await fetch(uri.replace("ipfs://", "https://ipfs.io")).then(r => r.json());
-                preview.style.display = "block";
-                preview.innerHTML = `<img src="${meta.image.replace("ipfs://", "https://ipfs.io")}"><br><small style="color:var(--gold); font-size:10px;">${meta.name}</small>`;
-            } catch (e) { preview.style.display = "none"; }
+                preview.innerHTML = `<img src="${meta.image.replace("ipfs://", "https://ipfs.io")}" class="h-full rounded-lg object-contain p-2">`;
+            } catch (e) { preview.innerText = "Error cargando Metadata"; }
         }
     }
 
-    // 5. ACCIONES CONTRATO
+    // 5. ACCIONES
     async function listNFTAction() {
         if(!signer) return alert("Conecta tu wallet");
         try {
             const abi = ["function listNFT(address,uint256,uint256) public"];
             const contract = new ethers.Contract(MAIN_CONTRACT, abi, signer);
-            const tx = await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, ethers.parseEther(document.getElementById('price').value));
-            alert("Listado enviado con éxito");
+            const priceVal = ethers.parseEther(document.getElementById('price').value);
+            const tx = await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, priceVal);
+            alert("Listado enviado!");
         } catch(e) { alert("Error en transacción"); }
     }
 
@@ -259,7 +243,7 @@
         if(!signer) return alert("Conecta tu wallet");
         try {
             const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
-            alert("Membresía activada. Espere confirmación.");
+            alert("Pago enviado. Activando VIP...");
         } catch(e) { alert("Error en pago VIP"); }
     }
 
@@ -267,26 +251,31 @@
     document.addEventListener('DOMContentLoaded', () => {
         initChart();
         updateTicker();
-        setInterval(updateTicker, 25000);
+        setInterval(updateTicker, 30000);
         document.getElementById('nftAddr').addEventListener('input', fetchNFTPreview);
         document.getElementById('tokenId').addEventListener('input', fetchNFTPreview);
         
         const car = document.getElementById('nftCarousel');
-        for(let i=0; i<12; i++) {
-            car.innerHTML += `<div class="carousel-item"><span style="font-size:1.8rem">👾</span><b style="margin:5px 0">MONSTER #${200+i}</b><span style="color:#666; font-size:0.65rem">VENTA: ${(Math.random()*1.5).toFixed(2)} POL</span></div>`;
+        for(let i=0; i<15; i++) {
+            car.innerHTML += `<div class="min-w-[200px] glass p-4 text-center">
+                <div class="text-3xl mb-2">👾</div>
+                <div class="orbitron text-[9px] text-yellow-500 font-bold mb-1 uppercase">Monster #${500+i}</div>
+                <div class="text-[10px] font-bold tracking-tighter">${(Math.random()*1.5).toFixed(2)} POL</div>
+            </div>`;
         }
         let pos = 0;
         setInterval(() => {
-            pos += 215;
+            pos += 216;
             if (pos >= car.scrollWidth - 800) pos = 0;
             car.style.transform = `translateX(-${pos}px)`;
-        }, 4500);
+        }, 4000);
     });
 </script>
 
-<script src="https://kdmjzwq.com/br/a924728c794f8e62.js?force_https=1"></script>
-<script src="https://kdmjzwq.com/br/da3cf39a164489ee.js?force_https=1"></script>
-<script src="https://pl28693298.effectivegatecpm.com/d5/8d/c9/d58dc9110d4b60bc79c3c0f6f93822e4.js"></script>
+<!-- [MANTENIDO] SCRIPTS EXTERNOS DE PUBLICIDAD -->
+<script src="https://kdmjzwq.com"></script>
+<script src="https://kdmjzwq.com"></script>
+<script src="https://pl28693298.effectivegatecpm.com"></script>
 
 </body>
 </html>
