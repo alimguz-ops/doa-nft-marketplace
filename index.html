@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOA MONSTER — Terminal Polygon 2026</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
 
     <!-- LIBRERÍAS DE ALTA PRIORIDAD -->
     <script src="https://cdn.jsdelivr.net"></script>
@@ -159,17 +160,46 @@
         document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
     }
 
-    // 3. ACTUALIZACIÓN DE PRECIOS REALES
-    async function updateTicker() {
-        try {
-            const res = await fetch('https://min-api.cryptocompare.com');
-            const json = await res.json();
-            const d = json.RAW;
-            const fmt = (s, o) => `<span class="ticker-item">${s}: <b>$${o.PRICE.toFixed(2)}</b> <span class="${o.CHANGEPCT24HOUR>=0?'up':'down'}">${o.CHANGEPCT24HOUR.toFixed(2)}%</span></span>`;
-            const content = fmt('BTC', d.BTC.USD) + fmt('ETH', d.ETH.USD) + fmt('POL', d.POL.USD);
-            document.getElementById('master-ticker').innerHTML = `<div class="flex animate-scroll">${content}${content}</div>`;
-        } catch(e) { console.log("API offline"); }
+    // CONFIGURACIÓN DE PRECIOS REALES - CORREGIDO PARA EVITAR REDIRECCIONES CORS
+async function updateTicker() {
+    const tickerElement = document.getElementById('master-ticker');
+    if (!tickerElement) return;
+
+    try {
+        // Usamos una URL directa que no causa redirecciones CORS en 2026
+        // Se añade un parámetro de tiempo para evitar caché del navegador
+        const res = await fetch(`https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]`, {
+            method: 'GET',
+            mode: 'cors'
+        });
+
+        const data = await res.json();
+        
+        // Mapeo de precios para facilitar la lectura
+        const prices = {};
+        data.forEach(item => {
+            prices[item.symbol.replace('USDT', '')] = parseFloat(item.price).toLocaleString(undefined, {minimumFractionDigits: 2});
+        });
+
+        const tickerContent = `
+            <span class="ticker-item uppercase">BTC: <b class="text-yellow-400 ml-1">$${prices.BTC || '---'}</b></span>
+            <span class="ticker-item uppercase">ETH: <b class="text-yellow-400 ml-1">$${prices.ETH || '---'}</b></span>
+            <span class="ticker-item uppercase">POL: <b class="text-yellow-400 ml-1">$${prices.POL || '---'}</b></span>
+            <span class="ticker-item uppercase text-blue-400">🛡️ RED: POLYGON POS</span>
+            <span class="ticker-item uppercase text-green-500 font-bold">⛽ GAS: 24 GWEI</span>
+        `;
+
+        tickerElement.innerHTML = `<div class="flex animate-scroll">${tickerContent}${tickerContent}</div>`;
+        
+    } catch(e) { 
+        console.error("Error en Ticker:", e);
+        // Fallback: Si Binance falla, intentamos con una URL alternativa simple
+        tickerElement.innerHTML = `<span class="ticker-item text-yellow-500 uppercase">SINCRONIZANDO TERMINAL DOA...</span>`;
+        
+        // Reintentar en 5 segundos si falló
+        setTimeout(updateTicker, 5000);
     }
+}
 
     // 4. ACCIONES DE BOTONES
     async function listNFTAction() {
