@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOA MONSTER — Marketplace Automatizado</title>
+    <title>DOA MONSTER — Terminal Polygon 2026</title>
 
-   <!-- 1. LIBRERÍAS DE FUNCIONAMIENTO REAL -->
-    <script src="https://cdnjs.cloudflare.com"></script>
+    <!-- LIBRERÍAS DE ALTA PRIORIDAD -->
+    <script src="https://cdn.jsdelivr.net"></script>
     <script src="https://unpkg.com"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
 
     <!-- 2. MONETIZACIÓN Y ANALÍTICA (ACTIVOS) -->
     <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
@@ -22,58 +21,32 @@
         gtag('config', 'G-E14Z7MFKB7');
     </script>
 
-    <!-- LIBRERÍAS DE FUNCIONAMIENTO REAL (AÑADIDAS/CORREGIDAS) -->
-    <script src="https://cdnjs.cloudflare.com"></script>
-    <script src="https://unpkg.com"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-
     <style>
         :root { --gold: #FFD700; --neon: #ff00e6; --bg: #020202; }
         body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; background-image: radial-gradient(circle at 50% -20%, #1a1a1a, #020202); margin: 0; padding-bottom: 80px; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* EFECTO 3D PROFUNDO */
-        .glass-3d {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* BOTONES FLOTANTES */
+        .glass-3d { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; transition: 0.4s; }
+        
+        /* AVISO DE RED INCORRECTA */
+        #network-alert { position: fixed; top: 0; width: 100%; background: #ff4444; color: #fff; text-align: center; padding: 10px; font-weight: bold; z-index: 1000000; display: none; cursor: pointer; font-family: 'Orbitron'; font-size: 12px; }
+        
+        .btn-float { width: 55px; height: 55px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; border: none; box-shadow: 0 0 20px rgba(255,215,0,0.4); }
         .floating-actions { position: fixed; right: 25px; bottom: 100px; display: flex; flex-direction: column; gap: 15px; z-index: 100000; }
-        .btn-float { width: 55px; height: 55px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 20px rgba(255,215,0,0.4); cursor: pointer; transition: 0.3s; border: none; }
-        .btn-float:hover { transform: scale(1.1) rotate(15deg); background: #fff; }
-
-        /* CARRUSEL INFINITO */
-        .carousel-container { width: 100%; overflow: hidden; position: relative; padding: 20px 0; }
         .carousel-track { display: flex; gap: 20px; animation: scroll-infinite 30s linear infinite; width: max-content; }
         @keyframes scroll-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .monster-card { min-width: 220px; height: 140px; background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-        /* BARRA DE ESTADO TICKER */
-        .footer-status-bar {
-            position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important;
-            background: rgba(0,0,0,0.98) !important; border-top: 1px solid #222 !important; display: flex !important; align-items: center !important;
-            padding: 0 25px !important; z-index: 999999 !important;
-        }
-        .status-dot { height: 10px; width: 10px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 15px #00ff00; animation: pulse 1.5s infinite; margin-right: 15px; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1.1); } 50% { opacity: 0.3; transform: scale(0.8); } }
-        
+        .footer-status-bar { position: fixed; bottom: 0; width: 100%; height: 45px; background: rgba(0,0,0,0.98); border-top: 1px solid #222; display: flex; align-items: center; padding: 0 25px; z-index: 999999; }
         .ticker-item { padding: 0 40px; font-size: 11px; font-weight: bold; font-family: 'Orbitron'; color: #666; white-space: nowrap; }
-        .up { color: #00ff88 !important; } .down { color: #ff4444 !important; }
-        
         .animate-scroll { display: flex; animation: scroll-text 40s linear infinite; width: max-content; }
         @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
+        .up { color: #00ff88; } .down { color: #ff4444; }
         input { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: var(--gold) !important; padding: 14px !important; border-radius: 15px !important; outline: none; width: 100%; }
     </style>
 </head>
 <body>
 
-<!-- BOTONES FLOTANTES -->
+<!-- ALERTA DE RED -->
+<div id="network-alert" onclick="switchNetwork()">⚠️ RED INCORRECTA: HAZ CLIC AQUÍ PARA CAMBIAR A POLYGON</div>
+
 <div class="floating-actions">
     <button class="btn-float" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️</button>
     <button class="btn-float" style="background:#ff00e6; color:#fff;" onclick="connect()">🔌</button>
@@ -81,13 +54,12 @@
 </div>
 
 <div class="p-6 md:p-12 max-w-7xl mx-auto space-y-12">
-    <!-- HEADER -->
     <header class="flex flex-col md:flex-row justify-between items-center">
         <div>
             <h1 class="orbitron text-5xl font-bold text-yellow-400 tracking-tighter uppercase">DOA MONSTER</h1>
             <p class="text-[10px] tracking-[0.5em] text-gray-500 uppercase font-bold mt-2">Elite Automated Terminal</p>
         </div>
-        <div class="glass-3d px-10 py-5 flex items-center gap-8 mt-8 md:mt-0">
+        <div class="glass-3d px-10 py-5 flex items-center gap-8">
             <div class="text-right">
                 <p id="walletAddr" class="orbitron text-[10px] text-yellow-600 font-bold">DISCONNECTED</p>
                 <p id="userBalance" class="text-2xl font-bold text-white">0.00 POL</p>
@@ -96,176 +68,164 @@
         </div>
     </header>
 
-    <!-- ANALÍTICA (GRÁFICO REAL) -->
     <div class="glass-3d p-6 h-[350px] relative overflow-hidden">
-        <div class="absolute top-4 left-6 orbitron text-[10px] text-yellow-500/50 uppercase tracking-[0.2em]">Live Analytical Feed (POL/USD)</div>
         <div id="chart-container" class="w-full h-full"></div>
     </div>
 
-    <!-- CARRUSEL NFT -->
-    <div class="carousel-container">
-        <h2 class="orbitron text-pink-500 text-xs mb-6 tracking-[0.3em] font-bold uppercase">🔥 Activos en Tendencia Live</h2>
+    <div class="carousel-container overflow-hidden">
         <div id="nftCarousel" class="carousel-track"></div>
     </div>
 
-    <!-- PANELES DE CONTROL -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- BUSCADOR -->
-        <div class="glass-3d p-8 relative">
-            <h3 class="orbitron text-sm font-bold text-yellow-500 mb-8 uppercase tracking-widest">Explorador Global</h3>
-            <div class="space-y-5">
-                <input type="text" id="nftSearch" placeholder="Contrato o ID...">
-                <button class="w-full mt-2 py-4 bg-yellow-400 text-black font-bold orbitron text-xs rounded-xl">INICIAR ESCANEO</button>
-            </div>
-        </div>
-
-        <!-- PUBLICAR NFT -->
+        <!-- LISTAR NFT -->
         <div class="glass-3d p-8 border-t-2 border-yellow-500/30">
-            <h3 class="orbitron text-sm font-bold text-yellow-500 mb-8 uppercase tracking-widest">🚀 Publicar Activo</h3>
+            <h3 class="orbitron text-sm font-bold text-yellow-500 mb-8 uppercase">🚀 Publicar Activo</h3>
             <div class="space-y-4">
                 <input type="text" id="nftAddr" placeholder="Dirección Contrato 0x...">
                 <div class="flex gap-3">
-                    <input type="number" id="tokenId" placeholder="ID Token">
+                    <input type="number" id="tokenId" placeholder="ID">
                     <input type="text" id="price" placeholder="Precio POL">
                 </div>
-                <button onclick="listNFTAction()" class="w-full py-4 bg-yellow-500 text-black font-bold orbitron text-xs rounded-xl uppercase">Publicar Ahora</button>
+                <button id="btnList" onclick="listNFTAction()" class="w-full py-4 bg-yellow-500 text-black font-bold orbitron text-xs rounded-xl uppercase">Publicar Ahora</button>
             </div>
         </div>
 
         <!-- VIP PRO -->
         <div class="glass-3d p-8 border-t-2 border-pink-500/30">
-            <h3 class="orbitron text-sm font-bold text-pink-500 mb-4 uppercase tracking-widest">💎 Acceso VIP Pro</h3>
-            <p class="text-[11px] text-gray-400 mb-8 leading-relaxed">Comisiones 0% y auditoría de contratos en tiempo real.</p>
+            <h3 class="orbitron text-sm font-bold text-pink-500 mb-4 uppercase">💎 VIP Pro</h3>
+            <p class="text-[11px] text-gray-400 mb-8">Activa comisiones 0% en la red Polygon.</p>
             <div class="bg-black/50 p-5 rounded-2xl mb-8 flex justify-between items-center border border-white/5">
-                <span class="orbitron text-[10px] text-gray-500 uppercase">Suscripción</span>
-                <span class="text-xl font-bold text-yellow-400">0.1 POL <small class="text-[9px] text-gray-600">/ MES</small></span>
+                <span class="text-xl font-bold text-yellow-400">0.1 POL</span>
             </div>
-            <button onclick="buyVipAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-xs rounded-xl shadow-lg hover:bg-pink-500 transition-all uppercase">Activar VIP</button>
+            <button id="btnVip" onclick="buyVipAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-xs rounded-xl shadow-lg">ACTIVAR VIP</button>
         </div>
     </div>
 </div>
 
-<!-- BARRA DE ESTADO INFERIOR (TICKER REAL) -->
 <div class="footer-status-bar">
-    <div class="status-dot"></div>
-    <div class="orbitron text-[10px] font-black text-green-500 tracking-widest mr-8">LIVE</div>
-    <div class="flex-1 overflow-hidden">
-        <div id="master-ticker" class="flex items-center">
-            <!-- SE LLENA CON JS -->
-        </div>
-    </div>
-    <div class="hidden md:block border-l border-white/10 pl-8 orbitron text-[10px] font-bold text-gray-700">PRO v2.6.9</div>
+    <div id="master-ticker" class="flex items-center"></div>
 </div>
 
 <script>
-    // --- CONFIGURACIÓN TÉCNICA 2026 ---
     const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
+    const POLYGON_CHAIN_ID = "0x89"; // 137 en Decimal
     const ABI = [
         "function listNFT(address nft, uint256 tokenId, uint256 price, address token) external payable",
-        "function listingFee() public view returns (uint256)",
-        "function buySubWithUSDC() external"
+        "function listingFee() public view returns (uint256)"
     ];
-
     let provider, signer, contract;
 
-    // CONECTAR WALLET (BOTÓN 🔌)
+    // 1. DETECTOR DE RED Y CAMBIO AUTOMÁTICO
+    async function checkNetwork() {
+        if (window.ethereum) {
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            if (chainId !== POLYGON_CHAIN_ID) {
+                document.getElementById('network-alert').style.display = 'block';
+                return false;
+            } else {
+                document.getElementById('network-alert').style.display = 'none';
+                return true;
+            }
+        }
+        return false;
+    }
+
+    async function switchNetwork() {
+        try {
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: POLYGON_CHAIN_ID }],
+            });
+        } catch (e) {
+            if (e.code === 4902) {
+                alert("Por favor añade la red Polygon a tu MetaMask.");
+            }
+        }
+    }
+
+    // 2. CONEXIÓN Y BALANCE
     async function connect() {
-        if(window.ethereum) {
-            try {
-                provider = new ethers.BrowserProvider(window.ethereum);
-                const accounts = await provider.send("eth_requestAccounts", []);
-                signer = await provider.getSigner();
-                contract = new ethers.Contract(MAIN_CONTRACT, ABI, signer);
+        if (!window.ethereum) return alert("Instala MetaMask");
+        const isCorrect = await checkNetwork();
+        if (!isCorrect) return switchNetwork();
 
-                document.getElementById('walletAddr').innerText = accounts[0].slice(0,6)+'...'+accounts[0].slice(-4);
-                document.getElementById('walletAddr').style.color = "#00ff88";
-                
-                const bal = await provider.getBalance(accounts[0]);
-                document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
-            } catch (e) { console.error(e); }
-        } else { alert("MetaMask no detectada"); }
+        provider = new ethers.BrowserProvider(window.ethereum);
+        const accounts = await provider.send("eth_requestAccounts", []);
+        signer = await provider.getSigner();
+        contract = new ethers.Contract(MAIN_CONTRACT, ABI, signer);
+        
+        document.getElementById('walletAddr').innerText = accounts[0].slice(0,6)+'...'+accounts[0].slice(-4);
+        const bal = await provider.getBalance(accounts[0]);
+        document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
     }
 
-    // LISTAR NFT (BOTÓN 🚀)
-    async function listNFTAction() {
-        if(!contract) return alert("Conecta tu terminal 🔌");
-        const nft = document.getElementById('nftAddr').value;
-        const id = document.getElementById('tokenId').value;
-        const pr = document.getElementById('price').value;
-
-        try {
-            const fee = await contract.listingFee();
-            const tx = await contract.listNFT(nft, id, ethers.parseEther(pr), "0x0000000000000000000000000000000000000000", { value: fee });
-            alert("Enviando a Polygon... Espera confirmación");
-            await tx.wait();
-            alert("¡Activo publicado!");
-        } catch (e) { alert("Error: Verifica el contrato del NFT o el balance de POL."); }
-    }
-
-    // ACTIVAR VIP (BOTÓN 💎)
-    async function buyVipAction() {
-        if(!signer) return alert("Conecta tu wallet");
-        try {
-            const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
-            await tx.wait();
-            alert("¡VIP ACTIVADO!");
-        } catch (e) { alert("Error en el pago"); }
-    }
-
-    // TICKER DE PRECIOS REALES (APIs CORREGIDAS)
+    // 3. ACTUALIZACIÓN DE PRECIOS REALES
     async function updateTicker() {
         try {
             const res = await fetch('https://min-api.cryptocompare.com');
             const json = await res.json();
-            const data = json.RAW;
-
-            const fmt = (symbol, obj) => {
-                const color = obj.CHANGEPCT24HOUR >= 0 ? 'up' : 'down';
-                const icon = obj.CHANGEPCT24HOUR >= 0 ? '▲' : '▼';
-                return `<span class="ticker-item uppercase">${symbol}: <b class="text-yellow-400 ml-1">$${obj.PRICE.toLocaleString()}</b> <span class="${color} ml-1">${icon} ${obj.CHANGEPCT24HOUR.toFixed(2)}%</span></span>`;
-            };
-
-            const content = fmt('BTC', data.BTC.USD) + fmt('ETH', data.ETH.USD) + fmt('POL', data.POL.USD) + 
-                            `<span class="ticker-item uppercase text-blue-500">🛡️ SECURE NETWORK: POLYGON</span>` +
-                            `<span class="ticker-item uppercase text-yellow-500">⛽ GAS: 38 GWEI</span>`;
-
+            const d = json.RAW;
+            const fmt = (s, o) => `<span class="ticker-item">${s}: <b>$${o.PRICE.toFixed(2)}</b> <span class="${o.CHANGEPCT24HOUR>=0?'up':'down'}">${o.CHANGEPCT24HOUR.toFixed(2)}%</span></span>`;
+            const content = fmt('BTC', d.BTC.USD) + fmt('ETH', d.ETH.USD) + fmt('POL', d.POL.USD);
             document.getElementById('master-ticker').innerHTML = `<div class="flex animate-scroll">${content}${content}</div>`;
-        } catch(e) { console.log("Ticker Error"); }
+        } catch(e) { console.log("API offline"); }
     }
 
-    // GRÁFICO REALISTA
-    function initChart() {
-        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-            layout: { background: { color: 'transparent' }, textColor: '#FFD700', fontFamily: 'Orbitron' },
-            grid: { vertLines: { color: 'rgba(255,255,255,0.03)' }, horzLines: { color: 'rgba(255,255,255,0.03)' } }
-        });
-        const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.15)', bottomColor: 'transparent', lineWidth: 3 });
-        series.setData(Array.from({length:50}, (_,i) => ({ time: 1672531200 + (i*3600), value: 0.35 + Math.random()*0.15 })));
-        chart.timeScale().fitContent();
+    // 4. ACCIONES DE BOTONES
+    async function listNFTAction() {
+        if (!await checkNetwork()) return switchNetwork();
+        if (!contract) return alert("Conecta tu terminal 🔌");
+        const nft = document.getElementById('nftAddr').value;
+        const id = document.getElementById('tokenId').value;
+        const pr = document.getElementById('price').value;
+        try {
+            const fee = await contract.listingFee();
+            const tx = await contract.listNFT(nft, id, ethers.parseEther(pr), "0x0000000000000000000000000000000000000000", { value: fee });
+            await tx.wait();
+            alert("¡Activo publicado!");
+        } catch (e) { alert("Error en transacción."); }
     }
 
-    function syncData() { updateTicker(); connect(); alert("Terminal Sincronizada."); }
+    async function buyVipAction() {
+        if (!await checkNetwork()) return switchNetwork();
+        if (!signer) return alert("Conecta tu wallet");
+        try {
+            const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
+            await tx.wait();
+            alert("¡VIP ACTIVADO!");
+        } catch (e) { alert("Error en el pago."); }
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        initChart(); 
-        updateTicker(); 
+    function syncData() { updateTicker(); connect(); }
+
+    // INICIO
+    window.addEventListener('load', () => {
+        updateTicker();
         setInterval(updateTicker, 60000);
+        if (typeof LightweightCharts !== 'undefined') {
+            const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+                layout: { background: { color: 'transparent' }, textColor: '#FFD700' },
+                grid: { vertLines: { visible: false }, horzLines: { color: '#222' } }
+            });
+            const series = chart.addAreaSeries({ lineColor: '#FFD700' });
+            series.setData(Array.from({length:30}, (_,i) => ({ time: 1672531200 + (i*3600), value: 0.4 + Math.random()*0.2 })));
+        }
         
         // Carrusel de Monstruos
         const car = document.getElementById('nftCarousel');
         let monsters = "";
         for(let i=0; i<15; i++) {
-            monsters += `<div class="monster-card glass-3d">
-                <div class="text-4xl mb-2">👾</div>
-                <div class="orbitron text-[9px] text-yellow-400 font-bold uppercase">Monster #${900+i}</div>
-                <div class="text-[10px] font-bold mt-1 text-white">${(Math.random()*1.5).toFixed(2)} POL</div>
-            </div>`;
+            monsters += `<div class="monster-card glass-3d"><div class="text-4xl">👾</div><div class="orbitron text-[9px] text-yellow-400 mt-2">UNIT #${900+i}</div></div>`;
         }
         car.innerHTML = monsters + monsters;
+        
+        if (window.ethereum) {
+            window.ethereum.on('chainChanged', () => window.location.reload());
+        }
     });
 </script>
 
-<!-- [MANTENIDO] SCRIPTS PUBLICIDAD -->
+<!-- MONETIZACIÓN -->
 <script src="https://pl28693298.effectivegatecpm.com"></script>
 <script src="https://kdmjzwq.com"></script>
 
