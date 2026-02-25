@@ -189,27 +189,33 @@
     }
 
     async function updateTicker() {
-        const ticker = document.getElementById('ticker-content');
-        try {
-            // CORRECCIÓN: URL de API con parámetros de precio reales
-            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,polygon-ecosystem-token&vs_currencies=usd&include_24hr_change=true');
-            const data = await res.json();
-            
-            const format = (id, symbol, name) => {
-                const price = data[id].usd.toLocaleString();
-                const change = data[id].usd_24h_change.toFixed(2);
-                return `<div class="ticker-card" onclick="openMiniChart('${symbol}', '${name}')">
+    const ticker = document.getElementById('ticker-content');
+    try {
+        // Usamos Binance porque es pública y no bloquea a Vercel
+        const response = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
+        const data = await response.json();
+
+        // Mapeamos los datos para mostrarlos
+        const content = data.map(coin => {
+            const symbol = coin.symbol.replace('USDT', '');
+            const price = parseFloat(coin.lastPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
+            const change = parseFloat(coin.priceChangePercent).toFixed(2);
+            const color = change >= 0 ? 'text-green-500' : 'text-red-500';
+
+            return `
+                <div class="ticker-card">
                     <span>${symbol}</span> <b class="text-white">$${price}</b>
-                    <span class="${change >= 0 ? 'text-green-500' : 'text-red-500'}">${change}%</span>
+                    <span class="${color}">${change}%</span>
                 </div>`;
-            };
-            // Integración de IDs reales de la API
-            const content = format('bitcoin','BTC','Bitcoin') + format('ethereum','ETH','Ethereum') + format('polygon-ecosystem-token','POL','Polygon');
-            ticker.innerHTML = content + content + content;
-        } catch(e) { 
-            ticker.innerHTML = `<span class="text-[9px] px-10">CONECTANDO A NODOS...</span>`; 
-        }
+        }).join('');
+
+        ticker.innerHTML = content + content + content; // Efecto infinito
+    } catch(e) {
+        console.error("Error de red:", e);
+        ticker.innerHTML = `<span class="text-[9px] px-10 text-gray-500 uppercase tracking-widest">Esperando señal de mercado...</span>`;
     }
+}
+
 
     function openMiniChart(symbol, name) {
         document.getElementById('miniChartPopup').style.display = 'flex';
