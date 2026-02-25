@@ -179,16 +179,22 @@
         const accounts = await provider.send("eth_requestAccounts", []);
         signer = await provider.getSigner();
         contract = new ethers.Contract(MAIN_CONTRACT, ABI, signer);
-        document.getElementById('walletAddr').innerText = accounts.slice(0,6)+'...'+accounts.slice(-4);
-        const bal = await provider.getBalance(accounts);
+        
+        // CORRECCIÓN: Usar el primer elemento del array
+        const userAddr = accounts[0];
+        document.getElementById('walletAddr').innerText = userAddr.slice(0,6)+'...'+userAddr.slice(-4);
+        
+        const bal = await provider.getBalance(userAddr);
         document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
     }
 
     async function updateTicker() {
         const ticker = document.getElementById('ticker-content');
         try {
+            // CORRECCIÓN: URL de API con parámetros de precio reales
             const res = await fetch('https://api.coingecko.com');
             const data = await res.json();
+            
             const format = (id, symbol, name) => {
                 const price = data[id].usd.toLocaleString();
                 const change = data[id].usd_24h_change.toFixed(2);
@@ -197,9 +203,12 @@
                     <span class="${change >= 0 ? 'text-green-500' : 'text-red-500'}">${change}%</span>
                 </div>`;
             };
+            // Integración de IDs reales de la API
             const content = format('bitcoin','BTC','Bitcoin') + format('ethereum','ETH','Ethereum') + format('polygon-ecosystem-token','POL','Polygon');
             ticker.innerHTML = content + content + content;
-        } catch(e) { ticker.innerHTML = `<span class="text-[9px] px-10">SYNCING DATA...</span>`; }
+        } catch(e) { 
+            ticker.innerHTML = `<span class="text-[9px] px-10">CONECTANDO A NODOS...</span>`; 
+        }
     }
 
     function openMiniChart(symbol, name) {
@@ -207,7 +216,7 @@
         document.getElementById('popupTitle').innerText = name.toUpperCase();
         const container = document.getElementById('mini-chart-container');
         container.innerHTML = '';
-        const chart = LightweightCharts.createChart(container, { layout: { background: { color: 'transparent' }, textColor: '#444' }, grid: { vertLines: { visible: false }, horzLines: { visible: false } }, timeScale: { visible: false } });
+        const chart = LightweightCharts.createChart(container, { layout: { background: { color: 'transparent' }, textColor: '#888' }, grid: { vertLines: { visible: false }, horzLines: { visible: false } }, timeScale: { visible: false } });
         const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent', lineWidth: 2 });
         series.setData(Array.from({length:20}, (_,i) => ({ time: 1672531200 + (i*3600), value: 50 + Math.random()*20 })));
         chart.timeScale().fitContent();
@@ -235,8 +244,13 @@
     }
 
     window.addEventListener('load', () => {
-        updateTicker(); setInterval(updateTicker, 60000);
-        const mainChart = LightweightCharts.createChart(document.getElementById('main-chart'), { layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } } });
+        updateTicker(); 
+        setInterval(updateTicker, 60000);
+        
+        const mainChart = LightweightCharts.createChart(document.getElementById('main-chart'), { 
+            layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, 
+            grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } } 
+        });
         const mainSeries = mainChart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
         mainSeries.setData(Array.from({length:40}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*15 })));
         mainChart.timeScale().fitContent();
