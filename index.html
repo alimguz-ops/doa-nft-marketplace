@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOA MONSTER — Terminal Pro Polygon</title>
+    <title>DOA MONSTER — Terminal Élite Polygon 2026</title>
 
     <!-- FAVICON VIRTUAL -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
@@ -31,98 +31,101 @@
 
         body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; transition: 0.3s; margin: 0; padding-bottom: 40px; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-        .glass-3d { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; }
+        .glass-3d { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; }
         
-        /* ALERTA DE RED */
-        #network-alert { position: fixed; top: 0; width: 100%; background: #ff4444; color: #fff; text-align: center; padding: 6px; font-weight: bold; z-index: 1000000; display: none; cursor: pointer; font-size: 11px; font-family: 'Orbitron'; }
+        /* LÍNEA MEDIA DIVISORA */
+        .separator-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--bar-border), transparent); margin: 20px 0; }
 
-        /* BARRA INFERIOR SLIM PROFESIONAL */
+        /* ALERTA DE RED */
+        #network-alert { position: fixed; top: 0; width: 100%; background: #ff4444; color: #fff; text-align: center; padding: 6px; z-index: 1000000; display: none; font-size: 11px; font-family: 'Orbitron'; cursor: pointer; }
+
+        /* BARRA INFERIOR SLIM */
         .footer-status-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 28px; background: var(--bar-bg); border-top: 1px solid var(--bar-border); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 999999; backdrop-filter: blur(5px); }
-        .status-section { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--bar-border); padding-right: 12px; height: 100%; }
+        .status-section { display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--bar-border); padding-right: 12px; height: 100%; }
         .dot-live { height: 6px; width: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 6px var(--accent); }
         
         .ticker-viewport { flex: 1; overflow: hidden; display: flex; align-items: center; }
         .ticker-wrapper { display: flex; animation: ticker-infinite 35s linear infinite; white-space: nowrap; }
         @keyframes ticker-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .ticker-card { display: flex; align-items: center; gap: 8px; padding: 0 30px; font-size: 10px; font-weight: 600; color: #888; cursor: pointer; }
-        .ticker-card:hover { color: #fff; background: rgba(255,255,255,0.05); }
 
-        /* VENTANA FLOTANTE DE GRÁFICA */
-        .chart-popup { position: fixed; bottom: 35px; left: 15px; width: 300px; height: 180px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-radius: 12px; z-index: 1000001; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+        /* CARRUSEL CENTRAL (NFTs) */
+        .nft-carousel-container { width: 100%; overflow: hidden; padding: 10px 0; }
+        .nft-track { display: flex; gap: 20px; animation: nft-scroll 30s linear infinite; width: max-content; }
+        @keyframes nft-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .nft-card { min-width: 200px; padding: 15px; background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 15px; text-align: center; }
 
-        .btn-float { width: 50px; height: 50px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: none; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+        /* VENTANA GRÁFICA */
+        .chart-popup { position: fixed; bottom: 35px; left: 15px; width: 300px; height: 180px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-radius: 12px; z-index: 1000001; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+
+        .btn-float { width: 50px; height: 50px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: none; }
         .floating-actions { position: fixed; right: 20px; bottom: 60px; display: flex; flex-direction: column; gap: 12px; z-index: 100000; }
-        .carousel-track { display: flex; gap: 20px; animation: scroll-infinite 30s linear infinite; width: max-content; }
-        @keyframes scroll-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        
-        input { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: var(--gold) !important; padding: 10px !important; border-radius: 12px !important; outline: none; width: 100%; font-size: 13px; }
+        input { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: var(--gold) !important; padding: 10px !important; border-radius: 12px !important; outline: none; width: 100%; }
     </style>
 </head>
 <body id="mainBody">
 
-<!-- ALERTA DE RED -->
-<div id="network-alert" onclick="switchNetwork()">⚠️ RED INCORRECTA: PULSA AQUÍ PARA CAMBIAR A POLYGON MAINNET</div>
+<div id="network-alert" onclick="switchNetwork()">⚠️ RED INCORRECTA: CAMBIAR A POLYGON MAINNET</div>
 
-<!-- BOTONES FLOTANTES -->
 <div class="floating-actions">
     <button class="btn-float" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️</button>
     <button class="btn-float" style="background:#ff00e6; color:#fff;" onclick="connect()">🔌</button>
     <button class="btn-float" style="background:#00d2ff;" onclick="updateTicker()">🔄</button>
 </div>
 
-<div class="p-6 md:p-12 max-w-7xl mx-auto space-y-10">
-    <header class="flex flex-col md:flex-row justify-between items-center">
+<div class="p-6 md:p-10 max-w-7xl mx-auto">
+    <header class="flex flex-col md:flex-row justify-between items-center mb-8">
         <div>
             <h1 class="orbitron text-4xl font-bold text-yellow-400 tracking-tighter uppercase">DOA MONSTER</h1>
-            <p class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold mt-1">Terminal Élite Polygon 2026</p>
+            <p class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold">Terminal Élite Polygon</p>
         </div>
         <div class="glass-3d px-8 py-4 flex items-center gap-6">
             <div class="text-right">
                 <p id="walletAddr" class="orbitron text-[10px] text-gray-500">DISCONNECTED</p>
                 <p id="userBalance" class="text-xl font-bold text-white">0.00 POL</p>
             </div>
-            <button onclick="connect()" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-bold orbitron text-[10px] hover:scale-105 transition-all">CONECTAR</button>
+            <button onclick="connect()" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-bold orbitron text-[10px]">CONNECT</button>
         </div>
     </header>
 
-    <!-- GRÁFICO PRINCIPAL -->
-    <div class="glass-3d p-6 h-[320px] relative overflow-hidden">
+    <div class="glass-3d p-6 h-[300px] overflow-hidden mb-6">
         <div id="main-chart" class="w-full h-full"></div>
     </div>
 
-    <!-- CARRUSEL VISUAL -->
-    <div class="overflow-hidden">
-        <div id="nftCarousel" class="carousel-track"></div>
+    <!-- LÍNEA MEDIA -->
+    <div class="separator-line"></div>
+
+    <!-- CARRUSEL DE NFTs LISTADOS -->
+    <div class="nft-carousel-container">
+        <h2 class="orbitron text-[10px] text-pink-500 mb-4 tracking-widest font-bold">🔥 LIVE MARKET LISTINGS</h2>
+        <div id="nftCarousel" class="nft-track"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- LISTAR NFT -->
-        <div class="glass-3d p-8 border-t border-yellow-500/20">
-            <h3 class="orbitron text-xs font-bold text-yellow-500 mb-6 uppercase tracking-widest">🚀 Publicar Activo</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+        <div class="glass-3d p-8">
+            <h3 class="orbitron text-xs font-bold text-yellow-500 mb-6 uppercase">🚀 Publicar NFT</h3>
             <div class="space-y-4">
-                <input type="text" id="nftAddr" placeholder="Dirección Contrato 0x...">
+                <input type="text" id="nftAddr" placeholder="Contrato 0x...">
                 <div class="flex gap-3">
-                    <input type="number" id="tokenId" placeholder="ID Token">
+                    <input type="number" id="tokenId" placeholder="ID">
                     <input type="text" id="price" placeholder="Precio POL">
                 </div>
-                <button onclick="listNFTAction()" class="w-full py-4 bg-yellow-500 text-black font-bold orbitron text-[10px] rounded-xl hover:bg-white transition-all uppercase">Publicar Ahora</button>
+                <button onclick="listNFTAction()" class="w-full py-4 bg-yellow-500 text-black font-bold orbitron text-[10px] rounded-xl uppercase">Listar Ahora</button>
             </div>
         </div>
-
-        <!-- VIP PRO -->
         <div class="glass-3d p-8 border-t border-pink-500/20">
-            <h3 class="orbitron text-xs font-bold text-pink-500 mb-4 uppercase tracking-widest">💎 VIP Terminal</h3>
-            <p class="text-[11px] text-gray-400 mb-8 leading-relaxed">Activa comisiones 0% y auditoría de contratos en tiempo real.</p>
-            <button onclick="buyVipAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-[10px] rounded-xl shadow-lg hover:bg-pink-500 transition-all uppercase">Activar por 0.1 POL</button>
+            <h3 class="orbitron text-xs font-bold text-pink-500 mb-4 uppercase">💎 VIP Terminal</h3>
+            <p class="text-[11px] text-gray-400 mb-8 font-bold">Activa beneficios y comisiones 0.00%.</p>
+            <button onclick="buyVipAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-[10px] rounded-xl shadow-lg">Activar VIP (0.1 POL)</button>
         </div>
     </div>
 </div>
 
-<!-- VENTANA DE GRÁFICA MINI -->
+<!-- MINI CHART POPUP -->
 <div id="miniChartPopup" class="chart-popup">
     <div class="flex justify-between items-center p-2 bg-[#111] border-b border-[#222]">
-        <span id="popupTitle" class="orbitron text-[9px] text-yellow-500 font-bold">CHART</span>
-        <span class="cursor-pointer text-gray-500 hover:text-white" onclick="closePopup()">×</span>
+        <span id="popupTitle" class="orbitron text-[9px] text-yellow-500 font-bold uppercase">CHART</span>
+        <span class="cursor-pointer text-gray-500" onclick="closePopup()">×</span>
     </div>
     <div id="mini-chart-container" style="flex:1;"></div>
 </div>
@@ -131,62 +134,56 @@
 <div class="footer-status-bar">
     <div class="status-section">
         <div class="dot-live"></div>
-        <span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live | Aggregating</span>
+        <span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live | Sync</span>
     </div>
     <div class="ticker-viewport">
-        <div id="ticker-content" class="ticker-wrapper">
-            <!-- CARGANDO... -->
-        </div>
+        <div id="ticker-content" class="ticker-wrapper"></div>
     </div>
     <div class="flex items-center gap-4 border-l border-[#222] pl-4">
         <div class="flex gap-2 text-[12px] cursor-pointer">
             <span onclick="setTheme('light')">☀️</span>
             <span onclick="setTheme('dark')">🌙</span>
         </div>
-        <span class="orbitron text-[9px] text-gray-600 font-bold hidden md:block">COLLECTOR PRO</span>
         <span class="orbitron text-[9px] text-yellow-500 font-bold">CRYPTO USD</span>
     </div>
 </div>
 
 <script>
     const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
-    const POLYGON_CHAIN_ID = "0x89"; // 137 Decimal
-    let provider, signer, contract, miniChart;
+    const POLYGON_CHAIN_ID = "0x89";
+    const ABI = [
+        "function listNFT(address,uint256,uint256,address) payable",
+        "function listingFee() view returns (uint256)"
+    ];
+    let provider, signer, contract;
 
-    // 1. TEMAS
     function setTheme(mode) {
-        const body = document.getElementById('mainBody');
-        mode === 'light' ? body.classList.add('light-theme') : body.classList.remove('light-theme');
+        document.getElementById('mainBody').className = (mode === 'light' ? 'light-theme' : '');
     }
 
-    // 2. DETECTOR DE RED
     async function checkNetwork() {
         if (!window.ethereum) return false;
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        document.getElementById('network-alert').style.display = (chainId !== POLYGON_CHAIN_ID) ? 'block' : 'none';
+        document.getElementById('network-alert').style.display = (chainId !== POLYGON_CHAIN_ID ? 'block' : 'none');
         return chainId === POLYGON_CHAIN_ID;
     }
 
     async function switchNetwork() {
-        try {
-            await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN_ID }] });
-        } catch (e) { alert("Añade la red Polygon a tu MetaMask."); }
+        await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN_ID }] });
     }
 
-    // 3. CONEXIÓN WALLET
     async function connect() {
         if (!window.ethereum) return alert("Instala MetaMask");
         if (!await checkNetwork()) return switchNetwork();
         provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
         signer = await provider.getSigner();
-        contract = new ethers.Contract(MAIN_CONTRACT, ["function listNFT(address,uint256,uint256,address) payable", "function listingFee() view returns (uint256)"], signer);
-        document.getElementById('walletAddr').innerText = accounts[0].slice(0,6)+'...'+accounts[0].slice(-4);
-        const bal = await provider.getBalance(accounts[0]);
+        contract = new ethers.Contract(MAIN_CONTRACT, ABI, signer);
+        document.getElementById('walletAddr').innerText = accounts.slice(0,6)+'...'+accounts.slice(-4);
+        const bal = await provider.getBalance(accounts);
         document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
     }
 
-    // 4. TICKER Y GRÁFICAS MINI
     async function updateTicker() {
         const ticker = document.getElementById('ticker-content');
         try {
@@ -195,15 +192,14 @@
             const format = (id, symbol, name) => {
                 const price = data[id].usd.toLocaleString();
                 const change = data[id].usd_24h_change.toFixed(2);
-                return `
-                    <div class="ticker-card" onclick="openMiniChart('${symbol}', '${name}')">
-                        <span>${symbol}</span> <b class="text-white">$${price}</b>
-                        <span class="${change >= 0 ? 'text-green-500' : 'text-red-500'}">${change}%</span>
-                    </div>`;
+                return `<div class="ticker-card" onclick="openMiniChart('${symbol}', '${name}')">
+                    <span>${symbol}</span> <b class="text-white">$${price}</b>
+                    <span class="${change >= 0 ? 'text-green-500' : 'text-red-500'}">${change}%</span>
+                </div>`;
             };
-            const content = format('bitcoin','BTC','Bitcoin') + format('ethereum','ETH','Ethereum') + format('polygon-ecosystem-token','POL','Polygon') + `<div class="ticker-card">⛽ 24 GWEI</div>`;
+            const content = format('bitcoin','BTC','Bitcoin') + format('ethereum','ETH','Ethereum') + format('polygon-ecosystem-token','POL','Polygon');
             ticker.innerHTML = content + content + content;
-        } catch(e) { ticker.innerHTML = `<span class="text-[9px] px-10">SYNCING CRYPTO DATA...</span>`; }
+        } catch(e) { ticker.innerHTML = `<span class="text-[9px] px-10">SYNCING DATA...</span>`; }
     }
 
     function openMiniChart(symbol, name) {
@@ -215,19 +211,17 @@
         const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent', lineWidth: 2 });
         series.setData(Array.from({length:20}, (_,i) => ({ time: 1672531200 + (i*3600), value: 50 + Math.random()*20 })));
         chart.timeScale().fitContent();
-        miniChart = chart;
     }
 
     function closePopup() { document.getElementById('miniChartPopup').style.display = 'none'; }
 
-    // 5. ACCIONES CONTRATO
     async function listNFTAction() {
         if (!await checkNetwork()) return switchNetwork();
         if (!contract) return alert("Conecta la terminal 🔌");
         try {
             const fee = await contract.listingFee();
             const tx = await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, ethers.parseEther(document.getElementById('price').value), "0x0000000000000000000000000000000000000000", { value: fee });
-            await tx.wait(); alert("¡Éxito!");
+            await tx.wait(); alert("¡Publicado!");
         } catch (e) { alert("Error en transacción."); }
     }
 
@@ -237,28 +231,27 @@
         try {
             const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
             await tx.wait(); alert("¡VIP ACTIVADO!");
-        } catch (e) { alert("Fallo en pago."); }
+        } catch (e) { alert("Fallo."); }
     }
 
-    // INICIALIZACIÓN
     window.addEventListener('load', () => {
         updateTicker(); setInterval(updateTicker, 60000);
         const mainChart = LightweightCharts.createChart(document.getElementById('main-chart'), { layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } } });
-        const mainSeries = mainChart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.15)', bottomColor: 'transparent' });
-        mainSeries.setData(Array.from({length:50}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*15 })));
+        const mainSeries = mainChart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
+        mainSeries.setData(Array.from({length:40}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*15 })));
         mainChart.timeScale().fitContent();
 
         const car = document.getElementById('nftCarousel');
         let monsters = "";
         for(let i=0; i<15; i++) {
-            monsters += `<div class="monster-card glass-3d text-center"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-yellow-400 font-bold uppercase">Unit #${800+i}</div></div>`;
+            monsters += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-yellow-400 font-bold uppercase">NFT Unit #${800+i}</div><div class="text-[10px] mt-1">0.45 POL</div></div>`;
         }
         car.innerHTML = monsters + monsters;
         if (window.ethereum) window.ethereum.on('chainChanged', () => window.location.reload());
     });
 </script>
 
-<!-- MONETIZACIÓN -->
+<!-- MONETIZACIÓN FINAL -->
 <script src="https://pl28693298.effectivegatecpm.com"></script>
 <script src="https://kdmjzwq.com"></script>
 
