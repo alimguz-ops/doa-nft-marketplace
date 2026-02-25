@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net"></script>
     <script src="https://unpkg.com"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com"></script>
+    <script src="https://unpkg.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
 
     <!-- MONETIZACIÓN Y ANALÍTICA -->
@@ -188,14 +190,13 @@
         document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
     }
 
-    async function updateTicker() {
+async function updateTicker() {
     const ticker = document.getElementById('ticker-content');
     try {
-        // Usamos Binance porque es pública y no bloquea a Vercel
-        const response = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
-        const data = await response.json();
+        // CORRECCIÓN: URL completa y válida para Binance
+        const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
+        const data = await res.json();
 
-        // Mapeamos los datos para mostrarlos
         const content = data.map(coin => {
             const symbol = coin.symbol.replace('USDT', '');
             const price = parseFloat(coin.lastPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
@@ -203,18 +204,37 @@
             const color = change >= 0 ? 'text-green-500' : 'text-red-500';
 
             return `
-                <div class="ticker-card">
+                <div class="ticker-card" onclick="openMiniChart('${symbol}', '${symbol}')">
                     <span>${symbol}</span> <b class="text-white">$${price}</b>
                     <span class="${color}">${change}%</span>
                 </div>`;
         }).join('');
 
-        ticker.innerHTML = content + content + content; // Efecto infinito
+        ticker.innerHTML = content + content + content;
     } catch(e) {
-        console.error("Error de red:", e);
-        ticker.innerHTML = `<span class="text-[9px] px-10 text-gray-500 uppercase tracking-widest">Esperando señal de mercado...</span>`;
+        console.error("Error:", e);
+        ticker.innerHTML = `<span class="text-[9px] px-10">ERROR DE SEÑAL...</span>`;
     }
 }
+
+    // 2. CONEXIÓN WALLET PROFESIONAL
+        async function connect() {
+            if (!window.ethereum) return alert("Instala MetaMask");
+            try {
+                provider = new ethers.BrowserProvider(window.ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+                signer = await provider.getSigner();
+                
+                const address = accounts[0];
+                document.getElementById('walletAddr').innerText = address.slice(0,6)+'...'+address.slice(-4);
+                
+                const bal = await provider.getBalance(address);
+                document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
+            } catch (e) {
+                console.error(e);
+                alert("Error de conexión");
+            }
+        }
 
 
     function openMiniChart(symbol, name) {
@@ -249,27 +269,29 @@
         } catch (e) { alert("Fallo."); }
     }
 
-    window.addEventListener('load', () => {
-        updateTicker(); 
-        setInterval(updateTicker, 60000);
-        
-        const mainChart = LightweightCharts.createChart(document.getElementById('main-chart'), { 
-            layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, 
-            grid: { vertLines: { color: '#111' }, horzLines: { color: '#111' } } 
-        });
-        const mainSeries = mainChart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
-        mainSeries.setData(Array.from({length:40}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*15 })));
-        mainChart.timeScale().fitContent();
+    // Iniciar Gráfica Principal
+            const chartElement = document.getElementById('main-chart');
+            if (chartElement) {
+                const chart = LightweightCharts.createChart(chartElement, {
+                    layout: { background: { color: 'transparent' }, textColor: '#FFD700' },
+                    grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } },
+                });
+                const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
+                series.setData(Array.from({length:50}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*20 })));
+                chart.timeScale().fitContent();
+            }
 
-        const car = document.getElementById('nftCarousel');
-        let monsters = "";
-        for(let i=0; i<15; i++) {
-            monsters += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-yellow-400 font-bold uppercase">NFT Unit #${800+i}</div><div class="text-[10px] mt-1">0.45 POL</div></div>`;
-        }
-        car.innerHTML = monsters + monsters;
-        if (window.ethereum) window.ethereum.on('chainChanged', () => window.location.reload());
-    });
-</script>
+            // Rellenar Carrusel de NFTs
+            const car = document.getElementById('nftCarousel');
+            if(car) {
+                let items = "";
+                for(let i=0; i<10; i++) {
+                    items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-yellow-400 font-bold">UNIT #${800+i}</div></div>`;
+                }
+                car.innerHTML = items + items;
+            }
+        
+        </script>
 
 <!-- MONETIZACIÓN FINAL -->
 <script src="https://pl28693298.effectivegatecpm.com"></script>
