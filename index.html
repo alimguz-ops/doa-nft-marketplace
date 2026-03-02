@@ -138,12 +138,31 @@
     <div id="mini-chart-container" style="flex:1;"></div>
 </div>
 
+<!-- BARRA INFERIOR COLLECTOR PRO - ESTILO OPENSEA -->
 <div class="footer-status-bar">
-    <div class="status-section"><div class="status-dot"></div><span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live | Sync</span></div>
-    <div class="ticker-container"><div id="ticker-content" class="ticker-wrapper"></div></div>
+    <div class="status-section">
+        <div class="status-dot"></div>
+        <span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live</span>
+        <span class="ml-4 text-[9px] text-gray-600">⚡ Aggregating</span>
+        <span class="ml-4 text-[9px] text-gray-600">📡 Networks</span>
+    </div>
+    
+    <div class="ticker-container">
+        <div id="ticker-content" class="ticker-wrapper">
+            <!-- Los precios reales de Binance cargan aquí -->
+            <span class="ticker-item">Sincronizando Terminal Pro...</span>
+        </div>
+    </div>
+
     <div class="flex items-center gap-4 border-l border-[#1a1a1a] pl-4">
-        <div class="flex gap-2 text-[12px] cursor-pointer"><span onclick="setTheme('light')">☀️</span><span onclick="setTheme('dark')">🌙</span></div>
-        <span class="orbitron text-[9px] text-yellow-500 font-bold">POL/USD</span>
+        <span class="text-[9px] text-gray-500">⛽ 88.7 GWEI</span>
+        <span class="text-[9px] text-gray-500">🎧 Support</span>
+        <div class="flex gap-2 text-[10px] cursor-pointer grayscale opacity-50 hover:opacity-100 transition">
+            <span onclick="setTheme('light')">☀️</span>
+            <span onclick="setTheme('dark')">🌙</span>
+        </div>
+        <div class="bg-[#111] px-2 py-1 rounded text-[8px] orbitron border border-[#222]">Collector <span class="text-yellow-500">Pro</span></div>
+        <span class="orbitron text-[8px] text-gray-400 font-bold uppercase">Crypto USD</span>
     </div>
 </div>
 
@@ -256,17 +275,29 @@
 
     // --- 5. PRECIOS DE BINANCE (BARRA INFERIOR) ---
     async function updateTicker() {
-        const ticker = document.getElementById('ticker-content');
-        try {
-            const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
-            const data = await res.json();
-            const content = data.map(c => {
-                const change = parseFloat(c.priceChangePercent).toFixed(2);
-                return `<div class="ticker-item">${c.symbol.replace('USDT','')} <span class="footer-val">$${parseFloat(c.lastPrice).toFixed(2)}</span><span class="${change >= 0 ? 'up':'down'}">${change}%</span></div>`;
-            }).join('');
-            ticker.innerHTML = content + content;
-        } catch(e) { console.log("Ticker offline"); }
+    const ticker = document.getElementById('ticker-content');
+    try {
+        const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
+        const data = await res.json();
+
+        const content = data.map(coin => {
+            const symbol = coin.symbol.replace('USDT', '');
+            const price = parseFloat(coin.lastPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
+            const change = parseFloat(coin.priceChangePercent).toFixed(2);
+            const trend = change >= 0 ? 'up' : 'down';
+
+            return `
+                <span class="ticker-item">
+                    ${symbol} <span class="footer-val">$${price}</span>
+                    <span class="${trend}">${change}%</span>
+                </span>`;
+        }).join('');
+
+        ticker.innerHTML = content + content + content;
+    } catch(e) {
+        ticker.innerHTML = `<span class="ticker-item">DATA SIGNAL LOST... RECONNECTING</span>`;
     }
+}
 
     // --- 6. CARRUSEL ---
     async function loadLiveNFTs() {
