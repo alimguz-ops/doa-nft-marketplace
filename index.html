@@ -5,64 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOA MONSTER — Terminal Élite Polygon 2026</title>
 
-    <!-- FAVICON VIRTUAL -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
 
     <!-- LIBRERÍAS DE ALTA PRIORIDAD -->
-    <script src="https://cdn.jsdelivr.net"></script>
-    <script src="https://unpkg.com"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com"></script>
     <script src="https://unpkg.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
 
-    <!-- MONETIZACIÓN Y ANALÍTICA -->
+    <!-- MONETIZACIÓN Y ANALÍTICA (ADSENSE & GTAG) -->
     <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
-    <script src="https://pl28693331.effectivegatecpm.com/5b/b0/0f/5bb00f11f7f416036edd1de62bae2166.js"></script>
     <script async src="https://www.googletagmanager.com"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-E14Z7MFKB7');
+        gtag('js', new Date()); gtag('config', 'G-E14Z7MFKB7');
     </script>
 
     <style>
         :root { --gold: #FFD700; --bg: #020202; --bar-bg: #050505; --bar-border: #151515; --accent: #00ff88; }
         .light-theme { --bg: #f0f0f0; --bar-bg: #ffffff; --bar-border: #ddd; }
 
-        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; transition: 0.3s; margin: 0; padding-bottom: 40px; overflow-x: hidden; }
+        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; transition: 0.3s; margin: 0; padding-bottom: 60px; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
         .glass-3d { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; }
         
-        /* LÍNEA MEDIA DIVISORA */
         .separator-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--bar-border), transparent); margin: 20px 0; }
-
-        /* ALERTA DE RED */
         #network-alert { position: fixed; top: 0; width: 100%; background: #ff4444; color: #fff; text-align: center; padding: 6px; z-index: 1000000; display: none; font-size: 11px; font-family: 'Orbitron'; cursor: pointer; }
 
-        /* BARRA INFERIOR SLIM */
-        .footer-status-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 28px; background: var(--bar-bg); border-top: 1px solid var(--bar-border); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; z-index: 999999; backdrop-filter: blur(5px); }
-        .status-section { display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--bar-border); padding-right: 12px; height: 100%; }
-        .dot-live { height: 6px; width: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 6px var(--accent); }
-        
-        .ticker-viewport { flex: 1; overflow: hidden; display: flex; align-items: center; }
-        .ticker-wrapper { display: flex; animation: ticker-infinite 35s linear infinite; white-space: nowrap; }
-        @keyframes ticker-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .ticker-card { display: flex; align-items: center; gap: 8px; padding: 0 30px; font-size: 10px; font-weight: 600; color: #888; cursor: pointer; }
+        /* BARRA INFERIOR BLINDADA - CSS ACTUALIZADO 2026 */
+        .footer-status-bar {
+            position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
+            height: 40px !important; background: #000000 !important; border-top: 1px solid #1a1a1a !important;
+            display: flex !important; align-items: center !important; padding: 0 20px !important;
+            z-index: 999999 !important; box-shadow: 0 -5px 20px rgba(0,0,0,0.9);
+        }
+        .status-dot {
+            height: 8px; width: 8px; background: #00ff00; border-radius: 50%;
+            box-shadow: 0 0 12px #00ff00; animation: status-pulse 1.5s infinite;
+            margin-right: 12px; flex-shrink: 0;
+        }
+        .ticker-container { flex: 1; overflow: hidden; white-space: nowrap; position: relative; display: flex; align-items: center; }
+        .ticker-wrapper { display: inline-block; white-space: nowrap; animation: ticker-animation 30s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 40px; font-size: 11px; color: #666; font-weight: bold; font-family: 'Orbitron'; text-transform: uppercase; }
+        .footer-val { color: var(--gold); margin-left: 5px; }
+        .up { color: #00ff88 !important; margin-left: 6px; font-size: 9px; }
+        .down { color: #ff4444 !important; margin-left: 6px; font-size: 9px; }
 
-        /* CARRUSEL CENTRAL (NFTs) */
-        .nft-carousel-container { width: 100%; overflow: hidden; padding: 10px 0; }
-        .nft-track { display: flex; gap: 20px; animation: nft-scroll 30s linear infinite; width: max-content; }
+        @keyframes ticker-animation { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+
+        /* CARRUSEL NFTs */
+        .nft-carousel-container { width: 100%; overflow: hidden; padding: 20px 0; }
+        .nft-track { display: flex; gap: 20px; animation: nft-scroll 40s linear infinite; width: max-content; }
         @keyframes nft-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .nft-card { min-width: 200px; padding: 15px; background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 15px; text-align: center; }
-
-        /* VENTANA GRÁFICA */
-        .chart-popup { position: fixed; bottom: 35px; left: 15px; width: 300px; height: 180px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-radius: 12px; z-index: 1000001; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .nft-card { min-width: 180px; padding: 15px; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 15px; text-align: center; transition: 0.3s; }
+        .nft-card:hover { border-color: var(--gold); transform: translateY(-5px); }
 
         .btn-float { width: 50px; height: 50px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: none; }
         .floating-actions { position: fixed; right: 20px; bottom: 60px; display: flex; flex-direction: column; gap: 12px; z-index: 100000; }
         input { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: var(--gold) !important; padding: 10px !important; border-radius: 12px !important; outline: none; width: 100%; }
+        
+        .chart-popup { position: fixed; bottom: 50px; left: 15px; width: 300px; height: 180px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; border-radius: 12px; z-index: 1000001; display: none; flex-direction: column; }
     </style>
 </head>
 <body id="mainBody">
@@ -94,18 +98,18 @@
         <div id="main-chart" class="w-full h-full"></div>
     </div>
 
-    <!-- LÍNEA MEDIA -->
     <div class="separator-line"></div>
 
-    <!-- CARRUSEL DE NFTs LISTADOS -->
+    <!-- CARRUSEL DINÁMICO TITANES -->
     <div class="nft-carousel-container">
-        <h2 class="orbitron text-[10px] text-pink-500 mb-4 tracking-widest font-bold">🔥 LIVE MARKET LISTINGS</h2>
+        <h2 class="orbitron text-[10px] text-pink-500 mb-4 tracking-widest font-bold uppercase">🔥 Live Genesis Titans & Market</h2>
         <div id="nftCarousel" class="nft-track"></div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+        <!-- BLOQUE MARKETPLACE -->
         <div class="glass-3d p-8">
-            <h3 class="orbitron text-xs font-bold text-yellow-500 mb-6 uppercase">🚀 Publicar NFT</h3>
+            <h3 class="orbitron text-xs font-bold text-yellow-500 mb-6 uppercase">🚀 Publicar NFT (Market)</h3>
             <div class="space-y-4">
                 <input type="text" id="nftAddr" placeholder="Contrato 0x...">
                 <div class="flex gap-3">
@@ -115,15 +119,15 @@
                 <button onclick="listNFTAction()" class="w-full py-4 bg-yellow-500 text-black font-bold orbitron text-[10px] rounded-xl uppercase">Listar Ahora</button>
             </div>
         </div>
+        <!-- BLOQUE MINT DOA MONSTER -->
         <div class="glass-3d p-8 border-t border-pink-500/20">
-            <h3 class="orbitron text-xs font-bold text-pink-500 mb-4 uppercase">💎 VIP Terminal</h3>
-            <p class="text-[11px] text-gray-400 mb-8 font-bold">Activa beneficios y comisiones 0.00%.</p>
-            <button onclick="buyVipAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-[10px] rounded-xl shadow-lg">Activar VIP (0.1 POL)</button>
+            <h3 class="orbitron text-xs font-bold text-pink-500 mb-4 uppercase">💎 Invocación DOA Monster</h3>
+            <p class="text-[11px] text-gray-400 mb-8 font-bold">Costo: 30 POL. Al mintear, tu Titán aparecerá en el Live Feed.</p>
+            <button onclick="mintTitanAction()" class="w-full py-4 bg-pink-600 text-white font-bold orbitron text-[10px] rounded-xl shadow-lg">MINTEAR TITÁN (30 POL)</button>
         </div>
     </div>
 </div>
 
-<!-- MINI CHART POPUP -->
 <div id="miniChartPopup" class="chart-popup">
     <div class="flex justify-between items-center p-2 bg-[#111] border-b border-[#222]">
         <span id="popupTitle" class="orbitron text-[9px] text-yellow-500 font-bold uppercase">CHART</span>
@@ -132,171 +136,105 @@
     <div id="mini-chart-container" style="flex:1;"></div>
 </div>
 
-<!-- BARRA INFERIOR SLIM -->
 <div class="footer-status-bar">
-    <div class="status-section">
-        <div class="dot-live"></div>
-        <span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live | Sync</span>
-    </div>
-    <div class="ticker-viewport">
-        <div id="ticker-content" class="ticker-wrapper"></div>
-    </div>
-    <div class="flex items-center gap-4 border-l border-[#222] pl-4">
-        <div class="flex gap-2 text-[12px] cursor-pointer">
-            <span onclick="setTheme('light')">☀️</span>
-            <span onclick="setTheme('dark')">🌙</span>
-        </div>
-        <span class="orbitron text-[9px] text-yellow-500 font-bold">CRYPTO USD</span>
+    <div class="status-section"><div class="status-dot"></div><span class="orbitron text-[9px] font-bold text-gray-500 uppercase">Live | Sync</span></div>
+    <div class="ticker-container"><div id="ticker-content" class="ticker-wrapper"></div></div>
+    <div class="flex items-center gap-4 border-l border-[#1a1a1a] pl-4">
+        <div class="flex gap-2 text-[12px] cursor-pointer"><span onclick="setTheme('light')">☀️</span><span onclick="setTheme('dark')">🌙</span></div>
+        <span class="orbitron text-[9px] text-yellow-500 font-bold">POL/USD</span>
     </div>
 </div>
 
 <script>
-    const MAIN_CONTRACT = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
-    const POLYGON_CHAIN_ID = "0x89";
-    const ABI = [
-        "function listNFT(address,uint256,uint256,address) payable",
-        "function listingFee() view returns (uint256)"
-    ];
-    let provider, signer, contract;
+    const MARKET_ADDR = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
+    const TITAN_ADDR = "0xe7C2ABC83E9F5d577ADEd7Fb999F6D0F3C41669a";
+    const POLYGON_CHAIN = "0x89";
 
-    function setTheme(mode) {
-        document.getElementById('mainBody').className = (mode === 'light' ? 'light-theme' : '');
-    }
+    const ABI_MARKET = ["function listNFT(address,uint256,uint256,address) payable", "function listingFee() view returns (uint256)"];
+    const ABI_TITAN = ["function mintTitan() public payable returns (uint256)", "function totalSupply() public view returns (uint256)", "function getMonsterData(uint256) view returns (uint256,uint256,uint256,uint256,bool)"];
 
-    async function checkNetwork() {
-        if (!window.ethereum) return false;
-        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        document.getElementById('network-alert').style.display = (chainId !== POLYGON_CHAIN_ID ? 'block' : 'none');
-        return chainId === POLYGON_CHAIN_ID;
-    }
-
-    async function switchNetwork() {
-        await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN_ID }] });
-    }
+    let provider, signer, marketContract, titanContract;
 
     async function connect() {
         if (!window.ethereum) return alert("Instala MetaMask");
-        if (!await checkNetwork()) return switchNetwork();
         provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send("eth_requestAccounts", []);
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+        if (chainId !== POLYGON_CHAIN) { document.getElementById('network-alert').style.display='block'; return; }
+        
         signer = await provider.getSigner();
-        contract = new ethers.Contract(MAIN_CONTRACT, ABI, signer);
+        marketContract = new ethers.Contract(MARKET_ADDR, ABI_MARKET, signer);
+        titanContract = new ethers.Contract(TITAN_ADDR, ABI_TITAN, signer);
         
-        // CORRECCIÓN: Usar el primer elemento del array
-        const userAddr = accounts[0];
-        document.getElementById('walletAddr').innerText = userAddr.slice(0,6)+'...'+userAddr.slice(-4);
-        
-        const bal = await provider.getBalance(userAddr);
+        document.getElementById('walletAddr').innerText = accounts[0].slice(0,6)+'...'+accounts[0].slice(-4);
+        const bal = await provider.getBalance(accounts[0]);
         document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
+        document.getElementById('network-alert').style.display='none';
+        loadLiveNFTs();
     }
 
-async function updateTicker() {
-    const ticker = document.getElementById('ticker-content');
-    try {
-        // CORRECCIÓN: URL completa y válida para Binance
-        const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
-        const data = await res.json();
-
-        const content = data.map(coin => {
-            const symbol = coin.symbol.replace('USDT', '');
-            const price = parseFloat(coin.lastPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
-            const change = parseFloat(coin.priceChangePercent).toFixed(2);
-            const color = change >= 0 ? 'text-green-500' : 'text-red-500';
-
-            return `
-                <div class="ticker-card" onclick="openMiniChart('${symbol}', '${symbol}')">
-                    <span>${symbol}</span> <b class="text-white">$${price}</b>
-                    <span class="${color}">${change}%</span>
-                </div>`;
-        }).join('');
-
-        ticker.innerHTML = content + content + content;
-    } catch(e) {
-        console.error("Error:", e);
-        ticker.innerHTML = `<span class="text-[9px] px-10">ERROR DE SEÑAL...</span>`;
+    async function mintTitanAction() {
+        if (!titanContract) return connect();
+        try {
+            const tx = await titanContract.mintTitan({ value: ethers.parseEther("30.0") });
+            await tx.wait(); alert("Titán Invocado!"); loadLiveNFTs();
+        } catch (e) { alert("Error en Mint."); }
     }
-}
-
-    // 2. CONEXIÓN WALLET PROFESIONAL
-        async function connect() {
-            if (!window.ethereum) return alert("Instala MetaMask");
-            try {
-                provider = new ethers.BrowserProvider(window.ethereum);
-                const accounts = await provider.send("eth_requestAccounts", []);
-                signer = await provider.getSigner();
-                
-                const address = accounts[0];
-                document.getElementById('walletAddr').innerText = address.slice(0,6)+'...'+address.slice(-4);
-                
-                const bal = await provider.getBalance(address);
-                document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
-            } catch (e) {
-                console.error(e);
-                alert("Error de conexión");
-            }
-        }
-
-
-    function openMiniChart(symbol, name) {
-        document.getElementById('miniChartPopup').style.display = 'flex';
-        document.getElementById('popupTitle').innerText = name.toUpperCase();
-        const container = document.getElementById('mini-chart-container');
-        container.innerHTML = '';
-        const chart = LightweightCharts.createChart(container, { layout: { background: { color: 'transparent' }, textColor: '#888' }, grid: { vertLines: { visible: false }, horzLines: { visible: false } }, timeScale: { visible: false } });
-        const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent', lineWidth: 2 });
-        series.setData(Array.from({length:20}, (_,i) => ({ time: 1672531200 + (i*3600), value: 50 + Math.random()*20 })));
-        chart.timeScale().fitContent();
-    }
-
-    function closePopup() { document.getElementById('miniChartPopup').style.display = 'none'; }
 
     async function listNFTAction() {
-        if (!await checkNetwork()) return switchNetwork();
-        if (!contract) return alert("Conecta la terminal 🔌");
+        if (!marketContract) return connect();
         try {
-            const fee = await contract.listingFee();
-            const tx = await contract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, ethers.parseEther(document.getElementById('price').value), "0x0000000000000000000000000000000000000000", { value: fee });
-            await tx.wait(); alert("¡Publicado!");
-        } catch (e) { alert("Error en transacción."); }
+            const fee = await marketContract.listingFee();
+            const tx = await marketContract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, ethers.parseEther(document.getElementById('price').value), "0x0000000000000000000000000000000000000000", { value: fee });
+            await tx.wait(); alert("Listado en Market!");
+        } catch (e) { alert("Error en Market."); }
     }
 
-    async function buyVipAction() {
-        if (!await checkNetwork()) return switchNetwork();
-        if (!signer) return alert("Conecta tu wallet");
+    async function updateTicker() {
         try {
-            const tx = await signer.sendTransaction({ to: MAIN_CONTRACT, value: ethers.parseEther("0.1") });
-            await tx.wait(); alert("¡VIP ACTIVADO!");
-        } catch (e) { alert("Fallo."); }
+            const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
+            const data = await res.json();
+            const content = data.map(c => {
+                const change = parseFloat(c.priceChangePercent).toFixed(2);
+                return `<div class="ticker-item">${c.symbol.replace('USDT','')} <span class="footer-val">$${parseFloat(c.lastPrice).toFixed(2)}</span><span class="${change >= 0 ? 'up':'down'}">${change}%</span></div>`;
+            }).join('');
+            document.getElementById('ticker-content').innerHTML = content + content + content;
+        } catch(e) { console.error(e); }
     }
 
-    // Iniciar Gráfica Principal
-            const chartElement = document.getElementById('main-chart');
-            if (chartElement) {
-                const chart = LightweightCharts.createChart(chartElement, {
-                    layout: { background: { color: 'transparent' }, textColor: '#FFD700' },
-                    grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } },
-                });
-                const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
-                series.setData(Array.from({length:50}, (_,i) => ({ time: 1672531200 + (i*3600), value: 10 + Math.random()*20 })));
-                chart.timeScale().fitContent();
-            }
-
-            // Rellenar Carrusel de NFTs
-            const car = document.getElementById('nftCarousel');
-            if(car) {
-                let items = "";
-                for(let i=0; i<10; i++) {
-                    items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-yellow-400 font-bold">UNIT #${800+i}</div></div>`;
+    async function loadLiveNFTs() {
+        const car = document.getElementById('nftCarousel');
+        let items = "";
+        try {
+            const total = titanContract ? await titanContract.totalSupply() : 0n;
+            if (total > 0n) {
+                for(let i=total-1n; i>= (total > 10n ? total-10n : 0n); i--) {
+                    items += `<div class="nft-card"><div class="text-3xl mb-2">🦖</div><div class="orbitron text-[9px] text-yellow-400 font-bold">TITAN #${i}</div></div>`;
                 }
-                car.innerHTML = items + items;
+            } else {
+                for(let i=0; i<10; i++) items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-gray-500 font-bold">UNIT #${800+i}</div></div>`;
             }
-        
-        </script>
+            car.innerHTML = items + items;
+        } catch(e) { console.error(e); }
+    }
 
-<!-- MONETIZACIÓN FINAL -->
-<script src="https://pl28693298.effectivegatecpm.com/d5/8d/c9/d58dc9110d4b60bc79c3c0f6f93822e4.js"></script>
-<script src="https://kdmjzwq.com/cu/6c5c7dc510ad699d.js?force_https=1"></script>
-<script src="https://kdmjzwq.com"></script>
+    window.onload = () => {
+        updateTicker(); setInterval(updateTicker, 30000); loadLiveNFTs();
+        const chartElement = document.getElementById('main-chart');
+        if (chartElement) {
+            const chart = LightweightCharts.createChart(chartElement, { layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } } });
+            const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
+            series.setData(Array.from({length:50}, (_,i) => ({ time: Math.floor(Date.now()/1000)-(50-i)*3600, value: 10 + Math.random()*20 })));
+            chart.timeScale().fitContent();
+        }
+    };
+    function setTheme(m) { document.getElementById('mainBody').className = (m === 'light' ? 'light-theme' : ''); }
+    function closePopup() { document.getElementById('miniChartPopup').style.display = 'none'; }
+    async function switchNetwork() { await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN }] }); }
+</script>
+
+<!-- SCRIPTS DE MONETIZACIÓN ADICIONALES -->
+<script src="https://pl28693331.effectivegatecpm.com"></script>
 
 </body>
 </html>
