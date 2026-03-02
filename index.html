@@ -15,11 +15,13 @@
 
     <!-- MONETIZACIÓN Y ANALÍTICA (ADSENSE & GTAG) -->
     <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
+    <script src="https://pl28693331.effectivegatecpm.com/5b/b0/0f/5bb00f11f7f416036edd1de62bae2166.js"></script>
     <script async src="https://www.googletagmanager.com"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date()); gtag('config', 'G-E14Z7MFKB7');
+        gtag('js', new Date());
+        gtag('config', 'G-E14Z7MFKB7');
     </script>
 
     <style>
@@ -146,95 +148,148 @@
 </div>
 
 <script>
+    // CONFIGURACIÓN GLOBAL - DOA MONSTER 2026
     const MARKET_ADDR = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
     const TITAN_ADDR = "0xe7C2ABC83E9F5d577ADEd7Fb999F6D0F3C41669a";
+    const ADMIN_WALLET = "0xD1f7a79CE44b267Dfe51B6F84008208550a30562"; // Para el VIP
     const POLYGON_CHAIN = "0x89";
 
-    const ABI_MARKET = ["function listNFT(address,uint256,uint256,address) payable", "function listingFee() view returns (uint256)"];
-    const ABI_TITAN = ["function mintTitan() public payable returns (uint256)", "function totalSupply() public view returns (uint256)", "function getMonsterData(uint256) view returns (uint256,uint256,uint256,uint256,bool)"];
+    const ABI_TITAN = [
+        "function mintTitan() public payable returns (uint256)", 
+        "function totalSupply() public view returns (uint256)", 
+        "function getMonsterData(uint256) view returns (uint256,uint256,uint256,uint256,bool)"
+    ];
+    const ABI_MARKET = [
+        "function listNFT(address,uint256,uint256,address) payable", 
+        "function listingFee() view returns (uint256)"
+    ];
 
-    let provider, signer, marketContract, titanContract;
+    let provider, signer, titanContract, marketContract;
 
+    // 1. CONEXIÓN ÉLITE (BOTÓN 🔌)
     async function connect() {
         if (!window.ethereum) return alert("Instala MetaMask");
-        provider = new ethers.BrowserProvider(window.ethereum);
-        const accounts = await provider.send("eth_requestAccounts", []);
-        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        if (chainId !== POLYGON_CHAIN) { document.getElementById('network-alert').style.display='block'; return; }
-        
-        signer = await provider.getSigner();
-        marketContract = new ethers.Contract(MARKET_ADDR, ABI_MARKET, signer);
-        titanContract = new ethers.Contract(TITAN_ADDR, ABI_TITAN, signer);
-        
-        document.getElementById('walletAddr').innerText = accounts[0].slice(0,6)+'...'+accounts[0].slice(-4);
-        const bal = await provider.getBalance(accounts[0]);
-        document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
-        document.getElementById('network-alert').style.display='none';
-        loadLiveNFTs();
+        try {
+            provider = new ethers.BrowserProvider(window.ethereum);
+            const accounts = await provider.send("eth_requestAccounts", []);
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            
+            if (chainId !== POLYGON_CHAIN) {
+                document.getElementById('network-alert').style.display = 'block';
+                await switchNetwork();
+                return;
+            }
+
+            signer = await provider.getSigner();
+            titanContract = new ethers.Contract(TITAN_ADDR, ABI_TITAN, signer);
+            marketContract = new ethers.Contract(MARKET_ADDR, ABI_MARKET, signer);
+
+            const address = accounts[0];
+            document.getElementById('walletAddr').innerText = address.slice(0,6)+'...'+address.slice(-4);
+            const bal = await provider.getBalance(address);
+            document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
+            document.getElementById('network-alert').style.display = 'none';
+            
+            loadLiveNFTs(); // Carga el carrusel real
+            alert("Terminal Sincronizada ⚡");
+        } catch (e) { alert("Fallo de conexión"); }
     }
 
+    // 2. BOTÓN DE MINTEO (30 POL)
     async function mintTitanAction() {
-        if (!titanContract) return connect();
+        if (!titanContract) return await connect();
         try {
             const tx = await titanContract.mintTitan({ value: ethers.parseEther("30.0") });
-            await tx.wait(); alert("Titán Invocado!"); loadLiveNFTs();
-        } catch (e) { alert("Error en Mint."); }
+            alert("Invocando Titán... No cierres la terminal");
+            await tx.wait();
+            alert("¡UNIDAD TITÁN DESPLEGADA!");
+            loadLiveNFTs();
+        } catch (e) { alert("Error en Invocación: Revisa tu saldo (30 POL)"); }
     }
 
-    async function listNFTAction() {
-        if (!marketContract) return connect();
+    // 3. BOTÓN VIP (0.1 POL)
+    async function buyVipAction() {
+        if (!signer) return await connect();
         try {
-            const fee = await marketContract.listingFee();
-            const tx = await marketContract.listNFT(document.getElementById('nftAddr').value, document.getElementById('tokenId').value, ethers.parseEther(document.getElementById('price').value), "0x0000000000000000000000000000000000000000", { value: fee });
-            await tx.wait(); alert("Listado en Market!");
-        } catch (e) { alert("Error en Market."); }
+            const tx = await signer.sendTransaction({
+                to: ADMIN_WALLET,
+                value: ethers.parseEther("0.1")
+            });
+            alert("Activando Protocolo VIP...");
+            await tx.wait();
+            alert("💎 ESTADO VIP ACTIVADO");
+        } catch (e) { alert("Fallo en activación VIP"); }
     }
 
+    // 4. GRÁFICA PRO (Cuadro Negro)
+    function initMainChart() {
+        const chartElement = document.getElementById('main-chart');
+        if (!chartElement) return;
+        const chart = LightweightCharts.createChart(chartElement, {
+            layout: { background: { color: 'transparent' }, textColor: '#FFD700' },
+            grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } },
+            timeScale: { borderVisible: false }
+        });
+        const series = chart.addAreaSeries({ 
+            lineColor: '#FFD700', 
+            topColor: 'rgba(255,215,0,0.2)', 
+            bottomColor: 'transparent',
+            lineWidth: 2 
+        });
+        // Datos de actividad simulada del mercado DOA
+        series.setData(Array.from({length:60}, (_,i) => ({ 
+            time: Math.floor(Date.now()/1000) - (60-i)*3600, 
+            value: 20 + Math.random()*15 
+        })));
+        chart.timeScale().fitContent();
+    }
+
+    // 5. TICKER BINANCE (Precios Reales)
     async function updateTicker() {
         try {
             const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
             const data = await res.json();
             const content = data.map(c => {
                 const change = parseFloat(c.priceChangePercent).toFixed(2);
-                return `<div class="ticker-item">${c.symbol.replace('USDT','')} <span class="footer-val">$${parseFloat(c.lastPrice).toFixed(2)}</span><span class="${change >= 0 ? 'up':'down'}">${change}%</span></div>`;
+                return `<div class="ticker-item">${c.symbol.replace('USDT','')} <span class="footer-val">$${parseFloat(c.lastPrice).toFixed(2)}</span><span class="${change >= 0 ? 'up':'down'}">${change >= 0 ? '▲':'▼'} ${change}%</span></div>`;
             }).join('');
-            document.getElementById('ticker-content').innerHTML = content + content + content;
-        } catch(e) { console.error(e); }
+            document.getElementById('ticker-content').innerHTML = content + content;
+        } catch(e) { console.error("Ticker Error"); }
     }
 
+    // 6. CARRUSEL DINÁMICO
     async function loadLiveNFTs() {
         const car = document.getElementById('nftCarousel');
-        let items = "";
         try {
             const total = titanContract ? await titanContract.totalSupply() : 0n;
-            if (total > 0n) {
-                for(let i=total-1n; i>= (total > 10n ? total-10n : 0n); i--) {
-                    items += `<div class="nft-card"><div class="text-3xl mb-2">🦖</div><div class="orbitron text-[9px] text-yellow-400 font-bold">TITAN #${i}</div></div>`;
+            let items = "";
+            if (Number(total) > 0) {
+                for(let i=Number(total)-1; i >= Math.max(0, Number(total)-12); i--) {
+                    items += `<div class="nft-card"><div class="text-3xl mb-2">🦖</div><div class="orbitron text-[9px] text-yellow-400 font-bold">TITAN #${i}</div><div class="text-[7px] text-gray-500">LIVE FEED</div></div>`;
                 }
             } else {
-                for(let i=0; i<10; i++) items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-gray-500 font-bold">UNIT #${800+i}</div></div>`;
+                for(let i=0; i<10; i++) items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-gray-800 font-bold">OFFLINE #${i}</div></div>`;
             }
             car.innerHTML = items + items;
-        } catch(e) { console.error(e); }
+        } catch(e) { console.log("Carrusel en espera..."); }
     }
 
+    // INICIALIZACIÓN COMPLETA
     window.onload = () => {
-        updateTicker(); setInterval(updateTicker, 30000); loadLiveNFTs();
-        const chartElement = document.getElementById('main-chart');
-        if (chartElement) {
-            const chart = LightweightCharts.createChart(chartElement, { layout: { background: { color: 'transparent' }, textColor: '#FFD700' }, grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } } });
-            const series = chart.addAreaSeries({ lineColor: '#FFD700', topColor: 'rgba(255,215,0,0.1)', bottomColor: 'transparent' });
-            series.setData(Array.from({length:50}, (_,i) => ({ time: Math.floor(Date.now()/1000)-(50-i)*3600, value: 10 + Math.random()*20 })));
-            chart.timeScale().fitContent();
-        }
+        initMainChart();
+        updateTicker();
+        setInterval(updateTicker, 30000);
+        loadLiveNFTs();
     };
-    function setTheme(m) { document.getElementById('mainBody').className = (m === 'light' ? 'light-theme' : ''); }
-    function closePopup() { document.getElementById('miniChartPopup').style.display = 'none'; }
+
     async function switchNetwork() { await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN }] }); }
+    function setTheme(m) { document.body.className = (m === 'light' ? 'light-theme' : ''); }
 </script>
 
-<!-- SCRIPTS DE MONETIZACIÓN ADICIONALES -->
-<script src="https://pl28693331.effectivegatecpm.com"></script>
 
+<!-- SCRIPTS DE MONETIZACIÓN ADICIONALES -->
+<script src="https://pl28693298.effectivegatecpm.com/d5/8d/c9/d58dc9110d4b60bc79c3c0f6f93822e4.js"></script>
+<script src="https://kdmjzwq.com/cu/6c5c7dc510ad699d.js?force_https=1"></script>
+<script src="https://kdmjzwq.com"></script>
 </body>
 </html>
