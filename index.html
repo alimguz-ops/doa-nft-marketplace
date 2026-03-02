@@ -171,27 +171,28 @@
 
 <script>
     // CONFIGURACIÓN DOA MONSTER 2026
-    const TITAN_ADDR = "0xe7C2ABC83E9F5d577ADEd7Fb999F6D0F3C41669a";
-    const MARKET_ADDR = "0x4C1372aB4197116d34e7e43489A8c4412FD74694";
-    const ADMIN_WALLET = "0xD1f7a79CE44b267Dfe51B6F84008208550a30562";
-    const POLYGON_CHAIN = "0x89";
+    const TITAN_ADDR = "0xe7C2ABC83E9F5d577ADEd7Fb999F6D0F3C41669a"; // Tu contrato nuevo
+    const MARKET_ADDR = "0x4C1372aB4197116d34e7e43489A8c4412FD74694"; // Marketplace
+    const POLYGON_CHAIN = "0x89"; // 137 Decimal
 
+    // ABIs INTEGRADOS
     const ABI_TITAN = [
-        "function mintTitan() public payable returns (uint256)", 
+        "function mintTitan() public payable returns (uint256)",
         "function totalSupply() public view returns (uint256)"
     ];
     const ABI_MARKET = [
-        "function listNFT(address,uint256,uint256,address) payable", 
+        "function listNFT(address,uint256,uint256,address) payable",
         "function listingFee() view returns (uint256)"
     ];
 
     let provider, signer, titanContract, marketContract;
 
-    // --- 1. CONEXIÓN WEB3 (BOTÓN 🔌) ---
+    // --- 🔌 CONEXIÓN CORE (BOTÓN CONECTAR) ---
     async function connect() {
         if (!window.ethereum) return alert("Instala MetaMask");
+        
         try {
-            // Ethers v6 Syntax
+            // Inicializar Provider Ethers v6
             provider = new ethers.BrowserProvider(window.ethereum);
             const accounts = await provider.send("eth_requestAccounts", []);
             signer = await provider.getSigner();
@@ -200,130 +201,119 @@
             titanContract = new ethers.Contract(TITAN_ADDR, ABI_TITAN, signer);
             marketContract = new ethers.Contract(MARKET_ADDR, ABI_MARKET, signer);
 
-            // Actualizar Interfaz
-            const address = accounts[0];
-            document.getElementById('walletAddr').innerText = address.slice(0,6)+'...'+address.slice(-4);
+            // Actualizar UI
+            const addr = accounts[0];
+            document.getElementById('walletAddr').innerText = addr.slice(0,6) + "..." + addr.slice(-4);
             
-            const bal = await provider.getBalance(address);
-            document.getElementById('userBalance').innerText = `${parseFloat(ethers.formatEther(bal)).toFixed(3)} POL`;
+            const balance = await provider.getBalance(addr);
+            document.getElementById('userBalance').innerText = parseFloat(ethers.formatEther(balance)).toFixed(2) + " POL";
             
-            // Verificar Red
+            // Verificar Red Polygon
             const network = await provider.getNetwork();
-            if (network.chainId !== 137n) { // 137 es Polygon
+            if (network.chainId !== 137n) {
                 document.getElementById('network-alert').style.display = 'block';
             } else {
                 document.getElementById('network-alert').style.display = 'none';
             }
 
+            console.log("Terminal DOA Conectada");
+            updateTicker();
             loadLiveNFTs();
-            console.log("Terminal Online");
-        } catch (e) {
-            console.error(e);
-            alert("Error al conectar wallet");
+        } catch (err) {
+            console.error(err);
+            alert("Error de conexión: " + err.message);
         }
     }
 
-    // --- 2. ACCIÓN DE MINT (30 POL) ---
+    // --- 🦖 FUNCIÓN MINT (BOTÓN MINTEAR TITÁN) ---
     async function mintTitanAction() {
         if (!titanContract) return await connect();
         try {
             const val = ethers.parseEther("30.0");
             const tx = await titanContract.mintTitan({ value: val });
-            alert("Invocando Titán... Transacción enviada");
+            alert("Invocación iniciada. Hash: " + tx.hash);
             await tx.wait();
-            alert("¡TITÁN DESPLEGADO!");
-            loadLiveNFTs();
+            alert("¡TITÁN DESPLEGADO CON ÉXITO!");
         } catch (e) {
-            alert("Error: Revisa tu saldo (30 POL) o red.");
+            alert("Error: Revisa tu saldo (30 POL) o cancelaste la firma.");
         }
     }
 
-    // --- 3. ACCIÓN VIP (0.1 POL) ---
-    async function buyVipAction() {
-        if (!signer) return await connect();
+    // --- 🚀 FUNCIÓN LISTAR (BOTÓN LISTAR AHORA) ---
+    async function listNFTAction() {
+        if (!marketContract) return await connect();
         try {
-            const tx = await signer.sendTransaction({
-                to: ADMIN_WALLET,
-                value: ethers.parseEther("0.1")
-            });
+            const nftAddr = document.getElementById('nftAddr').value;
+            const tid = document.getElementById('tokenId').value;
+            const prc = ethers.parseEther(document.getElementById('price').value);
+            
+            const fee = await marketContract.listingFee();
+            
+            const tx = await marketContract.listNFT(nftAddr, tid, prc, "0x0000000000000000000000000000000000000000", { value: fee });
+            alert("Publicando en Market...");
             await tx.wait();
-            alert("💎 ESTADO VIP ACTIVADO EN TERMINAL");
-        } catch (e) { alert("Fallo en pago VIP"); }
+            alert("¡NFT LISTADO!");
+        } catch (e) {
+            alert("Error al listar. Verifica los datos y el fee.");
+        }
     }
 
-    // --- 4. GRÁFICA DEL CUADRO NEGRO ---
-    function initMainChart() {
+    // --- 📊 GRÁFICA DEL CUADRO NEGRO (TRADINGVIEW LIGHT) ---
+    function initChart() {
         const container = document.getElementById('main-chart');
         if (!container) return;
+        
         const chart = LightweightCharts.createChart(container, {
             layout: { background: { color: 'transparent' }, textColor: '#FFD700' },
             grid: { vertLines: { visible: false }, horzLines: { color: '#151515' } },
-            timeScale: { visible: true, borderVisible: false }
+            timeScale: { borderVisible: false }
         });
+        
         const series = chart.addAreaSeries({ 
             lineColor: '#FFD700', 
             topColor: 'rgba(255,215,0,0.2)', 
-            bottomColor: 'transparent' 
+            bottomColor: 'transparent',
+            lineWidth: 2 
         });
-        // Datos dummy para que el cuadro no esté vacío
-        series.setData(Array.from({length:50}, (_,i) => ({ 
+
+        const data = Array.from({length:50}, (_,i) => ({ 
             time: Math.floor(Date.now()/1000) - (50-i)*3600, 
             value: 10 + Math.random()*20 
-        })));
+        }));
+        series.setData(data);
         chart.timeScale().fitContent();
     }
 
-    // --- 5. PRECIOS DE BINANCE (BARRA INFERIOR) ---
+    // --- 💹 PRECIOS BINANCE (BARRA INFERIOR) ---
     async function updateTicker() {
-    const ticker = document.getElementById('ticker-content');
-    try {
-        const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
-        const data = await res.json();
-
-        const content = data.map(coin => {
-            const symbol = coin.symbol.replace('USDT', '');
-            const price = parseFloat(coin.lastPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
-            const change = parseFloat(coin.priceChangePercent).toFixed(2);
-            const trend = change >= 0 ? 'up' : 'down';
-
-            return `
-                <span class="ticker-item">
-                    ${symbol} <span class="footer-val">$${price}</span>
-                    <span class="${trend}">${change}%</span>
-                </span>`;
-        }).join('');
-
-        ticker.innerHTML = content + content + content;
-    } catch(e) {
-        ticker.innerHTML = `<span class="ticker-item">DATA SIGNAL LOST... RECONNECTING</span>`;
-    }
-}
-
-    // --- 6. CARRUSEL ---
-    async function loadLiveNFTs() {
-        const car = document.getElementById('nftCarousel');
-        let items = "";
         try {
-            const total = titanContract ? await titanContract.totalSupply() : 0n;
-            if (total > 0n) {
-                for(let i=0; i<6; i++) {
-                    items += `<div class="nft-card"><div class="text-3xl mb-2">🦖</div><div class="orbitron text-[9px] text-yellow-400 font-bold">TITAN ACTIVE</div></div>`;
-                }
-            } else {
-                for(let i=0; i<6; i++) {
-                    items += `<div class="nft-card"><div class="text-3xl mb-2">👾</div><div class="orbitron text-[9px] text-gray-700 font-bold">OFFLINE</div></div>`;
-                }
-            }
-            car.innerHTML = items + items;
-        } catch(e) { console.log("Carrusel sync..."); }
+            const res = await fetch('https://api.binance.com["BTCUSDT","ETHUSDT","POLUSDT"]');
+            const data = await res.json();
+            const content = data.map(c => {
+                const change = parseFloat(c.priceChangePercent).toFixed(2);
+                return `<span class="ticker-item">${c.symbol.replace('USDT','')} <span class="footer-val">$${parseFloat(c.lastPrice).toFixed(2)}</span> <span class="${change >= 0 ? 'up':'down'}">${change}%</span></span>`;
+            }).join('');
+            document.getElementById('ticker-content').innerHTML = content + content;
+        } catch(e) { console.log("Ticker Error"); }
     }
 
-    // ARRANQUE
+    // --- 🦖 CARRUSEL NFTs ---
+    function loadLiveNFTs() {
+        const car = document.getElementById('nftCarousel');
+        if(!car) return;
+        let items = "";
+        for(let i=0; i<15; i++) {
+            items += `<div class="nft-card"><div class="text-3xl mb-2">🦖</div><div class="orbitron text-[9px] text-yellow-400 font-bold">TITAN UNIT #${i}</div></div>`;
+        }
+        car.innerHTML = items + items;
+    }
+
+    // ARRANQUE AUTOMÁTICO
     window.onload = () => {
-        initMainChart();
+        initChart();
         updateTicker();
-        setInterval(updateTicker, 30000);
         loadLiveNFTs();
+        setInterval(updateTicker, 30000);
     };
 
     async function switchNetwork() {
